@@ -1,107 +1,118 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-
-    {{ form_start(printForm, {'action': path('print_months'), 'method': 'GET', 'attr': {'class': 'ui form'}}) }}
-    <div class="fields inline">
-        <label for="from">Von</label>
-        <div class="field">
-            {{ form_widget(printForm.from.month) }}
-        </div>
-        <div class="field">
-            {{ form_widget(printForm.from.year, {'value': 'now'|date('Y') }) }}
-        </div>
-        <label for="from">Bis</label>
-        <div class="field">
-            {{ form_widget(printForm.to.month) }}
-        </div>
-        <div class="field">
-            {{ form_widget(printForm.to.year, {'value': 'now'|date('Y') }) }}
-        </div>
-        <div class="field">
-            {{ form_widget(printForm.startBalance) }}
-        </div>
-        <div class="field">
-            <button type="submit" class="ui button green">Drucken</button>
+    <div class="row">
+        <div class="column sixteen wide">
+            {{ form_start(printForm, {'action': path('print_months'), 'method': 'GET', 'attr': {'class': 'ui form'}}) }}
+            <div class="fields inline">
+                <label for="from">Von</label>
+                <div class="field">
+                    {{ form_widget(printForm.from.month) }}
+                </div>
+                <div class="field">
+                    {{ form_widget(printForm.from.year, {'value': 'now'|date('Y') }) }}
+                </div>
+                <label for="from">Bis</label>
+                <div class="field">
+                    {{ form_widget(printForm.to.month) }}
+                </div>
+                <div class="field">
+                    {{ form_widget(printForm.to.year, {'value': 'now'|date('Y') }) }}
+                </div>
+                <div class="field">
+                    {{ form_widget(printForm.startBalance) }}
+                </div>
+                <div class="field">
+                    <button type="submit" class="ui button green">Drucken</button>
+                </div>
+            </div>
+            {{ form_end(printForm, {'render_rest': false}) }}
         </div>
     </div>
-    {{ form_end(printForm, {'render_rest': false}) }}
 
-    <div class="column sixteen wide">
-        <table class="ui celled striped table fixed">
-            <thead>
-            <tr>
-                <th colspan="4">
-                    <span class="ui header">Bestellungen</span>
-                    <a href="{{ path('order_new') }}" class="ui icon button">
-                        <i class="plus icon"></i>
-                    </a>
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    Beleg Nr.
-                </th>
-                <th>
-                    Ware
-                </th>
-                <th>
-                    Preis
-                </th>
-                <th>
-                    Datum
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for order in orders %}
-                <tr>
-                    <td>{{ order.receiptNumber }}</td>
-                    <td>{{ order.item }}</td>
-                    <td>{{ order.price }} €</td>
-                    <td>{{ order.date | date('d.m.Y') }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="column sixteen wide">
+            <a href="{{ path('order_new') }}" class="ui icon button">
+                Neue Bestellung
+            </a>
+
+            <a href="{{ path('sale_new') }}" class="ui icon button">
+                Neue Verkaufsware
+            </a>
+        </div>
     </div>
 
-    <div class="column sixteen wide">
-        <table class="ui celled striped table fixed">
-            <thead>
-            <tr>
-                <th colspan="4">
-                    <span class="ui header">Verkaufsware</span>
-                    <a href="{{ path('sale_new') }}" class="ui icon button">
-                        <i class="plus icon"></i>
-                    </a>
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    Beleg Nr.
-                </th>
-                <th>
-                    Ware
-                </th>
-                <th>
-                    Preis
-                </th>
-                <th>
-                    Datum
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for sale in sales %}
+    <div class="row">
+        <div class="column eight wide">
+            <table class="ui celled striped table fixed">
+                <thead>
                 <tr>
-                    <td>{{ sale.receiptNumber }}</td>
-                    <td>{{ sale.item }}</td>
-                    <td>{{ sale.price }} €</td>
-                    <td>{{ sale.date | date('d.m.Y') }}</td>
+                    <th colspan="4">
+                        <span class="ui header">Bestellungen</span>
+                    </th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                <tr>
+                    <th>
+                        Beleg Nr.
+                    </th>
+                    <th>
+                        Ware
+                    </th>
+                    <th>
+                        Preis
+                    </th>
+                    <th>
+                        Datum
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.receiptNumber }}</td>
+                        <td>{{ order.item }}</td>
+                        <td>{{ order.price }} €</td>
+                        <td>{{ order.date | date('d.m.Y') }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="column eight wide">
+            <table class="ui celled striped table fixed">
+                <thead>
+                <tr>
+                    <th colspan="4">
+                        <span class="ui header">Verkaufsware</span>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Beleg Nr.
+                    </th>
+                    <th>
+                        Ware
+                    </th>
+                    <th>
+                        Preis
+                    </th>
+                    <th>
+                        Datum
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for sale in sales %}
+                    <tr>
+                        <td>{{ sale.receiptNumber }}</td>
+                        <td>{{ sale.item }}</td>
+                        <td>{{ sale.price }} €</td>
+                        <td>{{ sale.date | date('d.m.Y') }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}
