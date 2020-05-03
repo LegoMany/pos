@@ -18,13 +18,6 @@ class OrderController extends AbstractController
         $this->transactionRepository = $transactionRepository;
     }
 
-    public function index(): Response
-    {
-        return $this->render('order/index.html.twig', [
-            'orders' => $this->transactionRepository->findAllOrders(),
-        ]);
-    }
-
     /**
      * @param Request $request
      * @return Response

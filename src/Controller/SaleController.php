@@ -18,13 +18,6 @@ class SaleController extends AbstractController
         $this->transactionRepository = $transactionRepository;
     }
 
-    public function index(): Response
-    {
-        return $this->render('sale/index.html.twig', [
-            'sales' => $this->transactionRepository->findAllSales(),
-        ]);
-    }
-
     public function new(Request $request): Response
     {
         $sale = new Transaction();
