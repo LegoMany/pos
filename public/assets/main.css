@@ -1,0 +1,9 @@
+h1.header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.ui.table {
+    border-spacing: 2px;
+}

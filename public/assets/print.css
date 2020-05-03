@@ -1,0 +1,92 @@
+.clearfix {
+    overflow: auto;
+}
+
+.page {
+    margin-left: 20px;
+}
+
+.page {
+    page-break-after: always;
+}
+
+.page img.logo {
+    width: 260px;
+    float: right;
+}
+
+.page .header-left {
+    display: inline-block;
+    margin-top: 50px;
+}
+
+.page .header-right {
+    float: right;
+}
+
+.page .header-block p {
+    margin: 0 0 5px;
+    line-height: 1.2em;
+    font-size: 19px;
+}
+
+.page .header-block p span:first-child {
+    display: inline-block;
+    width: 200px;
+}
+
+.page .header-block p span:nth-child(2) {
+    display: inline-block;
+    width: 200px;
+    border-bottom: 1px solid darkgrey;
+}
+
+.page .ui.table tbody tr td {
+    height: 36px;
+}
+
+.page .ui.table tbody tr th.no-border-top,
+.page .ui.table tbody tr td.no-border-top {
+    border-top: 0;
+}
+
+.page .ui.table tbody tr th.no-border-right,
+.page .ui.table tbody tr td.no-border-right {
+    border-right: 0;
+}
+
+.page .ui.table tbody tr th.no-border-bottom,
+.page .ui.table tbody tr td.no-border-bottom {
+    border-bottom: 0;
+}
+
+.page .ui.table tbody tr th.no-border-left,
+.page .ui.table tbody tr td.no-border-left {
+    border-left: 0;
+}
+
+.page .table {
+    text-align: center;
+}
+
+.page .table .arrow {
+    text-align: left;
+    padding-left: 30px;
+    vertical-align: top;
+}
+
+.page .table .arrow img {
+    width: 30px;
+}
+
+.page .signature {
+    float: right;
+}
+
+.page .footer-logo {
+    width: 30px;
+}
+
+.ui.table thead tr:first-child th {
+    font-weight: normal;
+}

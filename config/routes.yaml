@@ -1,0 +1,43 @@
+pos_index:
+  path: /
+  controller: \Pos\Controller\PosController::index
+
+print_months:
+  path: /print
+  controller: \Pos\Controller\PosController::printMonths
+
+order_index:
+  path: /orders
+  controller: \Pos\Controller\OrderController::index
+order_new:
+  path: /order/new
+  controller: \Pos\Controller\OrderController::new
+order_edit:
+  path: /order/{id}/edit
+  controller: \Pos\Controller\OrderController::edit
+  requirements:
+    id: '\d+'
+order_delete:
+  path: /order/{id}
+  controller: \Pos\Controller\OrderController::delete
+  methods: DELETE
+  requirements:
+    id: '\d+'
+
+sale_index:
+  path: /sales
+  controller: \Pos\Controller\SaleController::index
+sale_new:
+  path: /sale/new
+  controller: \Pos\Controller\SaleController::new
+sale_edit:
+  path: /sale/{id}/edit
+  controller: \Pos\Controller\SaleController::edit
+  requirements:
+    id: '\d+'
+sale_delete:
+  path: /sale/{id}
+  controller: \Pos\Controller\SaleController::delete
+  methods: DELETE
+  requirements:
+    id: '\d+'

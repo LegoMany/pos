@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+  httpd:
+    image: in2code/httpd:2.4-alpine
+    environment:
+      WEB_DOCUMENT_ROOT: /app/${WEBROOT}/
+      VIRTUAL_HOST: ${HOST}
+      VIRTUAL_PORT: 443
+      VIRTUAL_PROTO: https
+    volumes:
+      - ./:/app/:cached
+    networks:
+      default:
+        aliases:
+          - ${HOST}
+
+  php:
+    image: in2code/php-dev:7.4-fpm
+    volumes:
+      - ./:/app/:cached
+      - $HOME/.composer/auth.json:/tmp/composer/auth.json
+      - $HOME/.composer/cache/:/tmp/composer/cache/
+    env_file:
+      - .env
+
+  mysql:
+    image: in2code/mysql:5.6
+    env_file:
+      - .env
+    volumes:
+      - mysql:/var/lib/mysql/
+    ports:
+      - ${SQLPORT}:3306
+
+volumes:
+  mysql:

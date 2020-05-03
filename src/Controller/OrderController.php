@@ -1,0 +1,107 @@
+<?php
+
+namespace Pos\Controller;
+
+use Pos\Entity\Transaction;
+use Pos\Form\OrderType;
+use Pos\Repository\TransactionRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+class OrderController extends AbstractController
+{
+    protected TransactionRepository $transactionRepository;
+
+    public function __construct(TransactionRepository $transactionRepository)
+    {
+        $this->transactionRepository = $transactionRepository;
+    }
+
+    public function index(): Response
+    {
+        return $this->render('order/index.html.twig', [
+            'orders' => $this->transactionRepository->findAllOrders(),
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function new(Request $request): Response
+    {
+        $order = new Transaction();
+        $form = $this->createForm(OrderType::class, $order);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $previousTransaction = $this->transactionRepository->getPreviousTransaction($order);
+            if ($previousTransaction instanceof Transaction) {
+                $order->receiptNumber = $previousTransaction->receiptNumber + 1;
+            } else {
+                $order->receiptNumber = 1;
+            }
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($order);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('pos_index');
+        }
+
+        return $this->render('order/new.html.twig', [
+            'order' => $order,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @param Transaction $order
+     * @return Response
+     */
+    public function show(Transaction $order): Response
+    {
+        return $this->render('order/show.html.twig', [
+            'order' => $order,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param Transaction $order
+     * @return Response
+     */
+    public function edit(Request $request, Transaction $order): Response
+    {
+        $form = $this->createForm(OrderType::class, $order);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('order_index');
+        }
+
+        return $this->render('order/edit.html.twig', [
+            'order' => $order,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param Transaction $order
+     * @return Response
+     */
+    public function delete(Request $request, Transaction $order): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $order->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($order);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('order_index');
+    }
+}

@@ -1,0 +1,32 @@
+<td>
+    {% if transaction.type == 'sale' %}
+        {{ transaction.price | euros }}
+    {% endif %}
+</td>
+<td>
+    {% if transaction.type == 'sale' %}
+        {{ transaction.price | cents }}
+    {% endif %}
+</td>
+<td>
+    {% if transaction.type == 'order' %}
+        {{ transaction.price | euros }}
+    {% endif %}
+</td>
+<td>
+    {% if transaction.type == 'order' %}
+        {{ transaction.price | cents }}
+    {% endif %}
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>{{ transaction.receiptNumber }}</td>
+<td>{{ transaction.date | date('d.m') }}</td>
+<td></td>
+<td>{{ transaction.item }}</td>
+<td></td>

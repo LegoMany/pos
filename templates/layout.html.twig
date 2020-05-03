@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('assets/semantic.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/main.css') }}">
+    </head>
+    <body class="ui container">
+        <h1 class="header">POS</h1>
+        <div class="ui grid">
+            {% block body %}{% endblock %}
+        </div>
+        <script src="{{ asset('assets/semantic.min.js') }}"></script>
+    </body>
+</html>
