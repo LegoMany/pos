@@ -80,13 +80,28 @@
 }
 
 .page .signature {
-    float: right;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    border-top: 1px solid darkgrey;
+    width: 260px;
+    text-align: center;
+    background-color: white;
 }
 
 .page .footer-logo {
     width: 30px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }
 
 .ui.table thead tr:first-child th {
     font-weight: normal;
+}
+
+.ui.table,
+.ui.structured.celled.table tr td,
+.ui.structured.celled.table tr th {
+    border-color: darkgrey;
 }

@@ -12,14 +12,14 @@ class NumberUtility
 
     public static function getEurosFromPrice(float $price)
     {
-        $formattedPrice = number_format($price, 3, '.', '');
+        $formattedPrice = number_format($price, 2, '.', '');
         $priceParts = explode('.', $formattedPrice);
         return $priceParts[0];
     }
 
     public static function getCentsFromPrice(float $price)
     {
-        $formattedPrice = number_format($price, 3, '.', '');
+        $formattedPrice = number_format($price, 2, '.', '');
         $priceParts = explode('.', $formattedPrice);
         if ($priceParts[1] === '000') {
             return '00';

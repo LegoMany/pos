@@ -6,9 +6,6 @@ print_months:
   path: /print
   controller: \Pos\Controller\PosController::printMonths
 
-order_index:
-  path: /orders
-  controller: \Pos\Controller\OrderController::index
 order_new:
   path: /order/new
   controller: \Pos\Controller\OrderController::new
@@ -24,9 +21,6 @@ order_delete:
   requirements:
     id: '\d+'
 
-sale_index:
-  path: /sales
-  controller: \Pos\Controller\SaleController::index
 sale_new:
   path: /sale/new
   controller: \Pos\Controller\SaleController::new
