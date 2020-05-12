@@ -43,6 +43,29 @@
     </div>
 
     <div class="row">
+        <div class="column sixteen wide">
+            <table class="ui celled striped table fixed">
+                <thead>
+                <tr>
+                    <th>Jahr</th>
+                    <th>Bestellungen</th>
+                    <th>Verkaufsware</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for year, sum in sums %}
+                    <tr>
+                        <td>{{ year }}</td>
+                        <td>{{ sum.order | number_format(2) }} €</td>
+                        <td>{{ sum.sale | number_format(2) }} €</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="column eight wide">
             <table class="ui celled striped table fixed">
                 <thead>
@@ -71,7 +94,7 @@
                     <tr>
                         <td>{{ order.receiptNumber }}</td>
                         <td>{{ order.item }}</td>
-                        <td>{{ order.price }} €</td>
+                        <td>{{ order.price | number_format(2) }} €</td>
                         <td>{{ order.date | date('d.m.Y') }}</td>
                     </tr>
                 {% endfor %}

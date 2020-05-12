@@ -25,9 +25,19 @@ class PosController extends AbstractController
     {
         $printForm = $this->createForm(PrintType::class);
 
+        $sales = $this->transactionRepository->findAllSales();
+        $orders = $this->transactionRepository->findAllOrders();
+
+        $sums = $this->transactionRepository->getSumForTypeGroupedByYear();
+        $combinedSums = [];
+        foreach ($sums as $sum) {
+            $combinedSums[$sum['year']][$sum['type']] = $sum['sum'];
+        }
+
         return $this->render('pos/index.html.twig', [
-            'sales' => $this->transactionRepository->findAllSales(),
-            'orders' => $this->transactionRepository->findAllOrders(),
+            'sales' => $sales,
+            'orders' => $orders,
+            'sums' => $combinedSums,
             'printForm' => $printForm->createView(),
         ]);
     }

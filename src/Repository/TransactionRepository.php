@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Types\Types;
 use Pos\Entity\Transaction;
+use Throwable;
 
 class TransactionRepository extends ServiceEntityRepository
 {
@@ -28,6 +29,25 @@ class TransactionRepository extends ServiceEntityRepository
     public function findAllSales(): array
     {
         return $this->findBy(['type' => Transaction::TYPE_SALE], ['date' => 'ASC']);
+    }
+
+    public function getSumForTypeGroupedByYear(): array
+    {
+        $connection = $this->getEntityManager()->getConnection();
+
+        $sql = 'select year(date) as year,
+                       type,
+                       round(sum(price), 2) as sum
+                from transaction
+                group by year(date), type';
+
+        try {
+            $stmt = $connection->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (Throwable $e) {
+            return [];
+        }
     }
 
     public function findByMonthAndYear(int $fromMonth, int $fromYear, int $toMonth, int $toYear): array
