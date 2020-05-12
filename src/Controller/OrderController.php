@@ -73,7 +73,7 @@ class OrderController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('order_index');
+            return $this->redirectToRoute('pos_index');
         }
 
         return $this->render('order/edit.html.twig', [
@@ -89,12 +89,10 @@ class OrderController extends AbstractController
      */
     public function delete(Request $request, Transaction $order): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $order->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($order);
-            $entityManager->flush();
-        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($order);
+        $entityManager->flush();
 
-        return $this->redirectToRoute('order_index');
+        return $this->redirectToRoute('pos_index');
     }
 }

@@ -20,7 +20,7 @@ class Transaction
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    public int $id;
+    public ?int $id = null;
 
     /**
      * @ORM\Column(type="datetime")

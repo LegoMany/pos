@@ -60,7 +60,7 @@ class SaleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('sale_index');
+            return $this->redirectToRoute('pos_index');
         }
 
         return $this->render('sale/edit.html.twig', [
@@ -69,14 +69,12 @@ class SaleController extends AbstractController
         ]);
     }
 
-    public function delete(Request $request, Transaction $sale): Response
+    public function delete(Transaction $sale): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $sale->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($sale);
-            $entityManager->flush();
-        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($sale);
+        $entityManager->flush();
 
-        return $this->redirectToRoute('sale_index');
+        return $this->redirectToRoute('pos_index');
     }
 }

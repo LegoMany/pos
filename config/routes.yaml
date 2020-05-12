@@ -10,28 +10,26 @@ order_new:
   path: /order/new
   controller: \Pos\Controller\OrderController::new
 order_edit:
-  path: /order/{id}/edit
+  path: /order/{order}/edit
   controller: \Pos\Controller\OrderController::edit
   requirements:
-    id: '\d+'
+    order: '\d+'
 order_delete:
-  path: /order/{id}
+  path: /order/{order}/delete
   controller: \Pos\Controller\OrderController::delete
-  methods: DELETE
   requirements:
-    id: '\d+'
+    order: '\d+'
 
 sale_new:
   path: /sale/new
   controller: \Pos\Controller\SaleController::new
 sale_edit:
-  path: /sale/{id}/edit
+  path: /sale/{sale}/edit
   controller: \Pos\Controller\SaleController::edit
   requirements:
-    id: '\d+'
+    sale: '\d+'
 sale_delete:
-  path: /sale/{id}
+  path: /sale/{sale}/delete
   controller: \Pos\Controller\SaleController::delete
-  methods: DELETE
   requirements:
-    id: '\d+'
+    sale: '\d+'

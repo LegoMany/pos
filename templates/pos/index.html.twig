@@ -56,8 +56,16 @@
                 {% for year, sum in sums %}
                     <tr>
                         <td>{{ year }}</td>
-                        <td>{{ sum.order | number_format(2) }} €</td>
-                        <td>{{ sum.sale | number_format(2) }} €</td>
+                        <td>
+                            {% if sum.order is defined %}
+                                {{ sum.order | number_format(2) }} €
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if sum.sale is defined %}
+                                {{ sum.sale | number_format(2) }} €
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -67,10 +75,10 @@
 
     <div class="row">
         <div class="column eight wide">
-            <table class="ui celled striped table fixed">
+            <table class="ui celled striped table">
                 <thead>
                 <tr>
-                    <th colspan="4">
+                    <th colspan="5">
                         <span class="ui header">Bestellungen</span>
                     </th>
                 </tr>
@@ -87,6 +95,7 @@
                     <th>
                         Datum
                     </th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -96,6 +105,10 @@
                         <td>{{ order.item }}</td>
                         <td>{{ order.price | number_format(2) }} €</td>
                         <td>{{ order.date | date('d.m.Y') }}</td>
+                        <td>
+                            <a href="{{ path('order_edit', {'order': order.id}) }}"><i class="edit icon blue"></i></a>
+                            <a href="{{ path('order_delete', {'order': order.id}) }}"><i class="trash icon red"></i></a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -103,10 +116,10 @@
         </div>
 
         <div class="column eight wide">
-            <table class="ui celled striped table fixed">
+            <table class="ui celled striped table">
                 <thead>
                 <tr>
-                    <th colspan="4">
+                    <th colspan="5">
                         <span class="ui header">Verkaufsware</span>
                     </th>
                 </tr>
@@ -123,6 +136,7 @@
                     <th>
                         Datum
                     </th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -132,6 +146,10 @@
                         <td>{{ sale.item }}</td>
                         <td>{{ sale.price }} €</td>
                         <td>{{ sale.date | date('d.m.Y') }}</td>
+                        <td>
+                            <a href="{{ path('sale_edit', {'sale': sale.id}) }}"><i class="edit icon blue"></i></a>
+                            <a href="{{ path('sale_delete', {'sale': sale.id}) }}"><i class="trash icon red"></i></a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
