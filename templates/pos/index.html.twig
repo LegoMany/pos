@@ -78,14 +78,11 @@
             <table class="ui celled striped table">
                 <thead>
                 <tr>
-                    <th colspan="5">
+                    <th colspan="4">
                         <span class="ui header">Bestellungen</span>
                     </th>
                 </tr>
                 <tr>
-                    <th>
-                        Beleg Nr.
-                    </th>
                     <th>
                         Ware
                     </th>
@@ -101,7 +98,6 @@
                 <tbody>
                 {% for order in orders %}
                     <tr>
-                        <td>{{ order.receiptNumber }}</td>
                         <td>{{ order.item }}</td>
                         <td>{{ order.price | number_format(2) }} €</td>
                         <td>{{ order.date | date('d.m.Y') }}</td>
@@ -119,14 +115,11 @@
             <table class="ui celled striped table">
                 <thead>
                 <tr>
-                    <th colspan="5">
+                    <th colspan="4">
                         <span class="ui header">Verkaufsware</span>
                     </th>
                 </tr>
                 <tr>
-                    <th>
-                        Beleg Nr.
-                    </th>
                     <th>
                         Ware
                     </th>
@@ -142,7 +135,6 @@
                 <tbody>
                 {% for sale in sales %}
                     <tr>
-                        <td>{{ sale.receiptNumber }}</td>
                         <td>{{ sale.item }}</td>
                         <td>{{ sale.price }} €</td>
                         <td>{{ sale.date | date('d.m.Y') }}</td>

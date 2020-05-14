@@ -52,9 +52,6 @@ class Transaction
      */
     public ?float $price = 0;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
     public ?int $receiptNumber = null;
 
     public function __construct()

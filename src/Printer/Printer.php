@@ -3,6 +3,7 @@
 namespace Pos\Printer;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Pos\Entity\Transaction;
 
 class Printer
 {
@@ -12,6 +13,8 @@ class Printer
      * @var ArrayCollection<Page>
      */
     public ArrayCollection $pages;
+
+    protected int $transactionCount = 0;
 
     public function __construct()
     {
@@ -38,8 +41,11 @@ class Printer
             }
             $newPage = new Page($month . ' / ' . $year, $startBalance);
             $leftoverRows = [];
+            /** @var Transaction $transaction */
             foreach ($transactions as $transaction) {
                 if ($newPage->getRows()->count() < self::ROWS_ALLOWED_PER_PAGE) {
+                    $this->transactionCount++;
+                    $transaction->receiptNumber = $this->transactionCount;
                     $newPage->addTransaction($transaction);
                 } else {
                     $leftoverRows[] = $transaction;
