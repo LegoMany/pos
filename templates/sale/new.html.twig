@@ -5,7 +5,7 @@
         <h2>Neue Verkaufsware</h2>
     </div>
     {{ form_start(form, {'attr': {'class': 'ui form'}}) }}
-    <div class="three fields">
+    <div class="fields">
         <div class="field">
             <label>Tag</label>
             {{ form_widget(form.date.day) }}
@@ -21,11 +21,11 @@
     </div>
 
     <div class="field">
-        {{ form_label(form.item) }}
+        <label>Text</label>
         {{ form_widget(form.item) }}
     </div>
     <div class="field">
-        {{ form_label(form.price) }}
+        <label>Preis</label>
         {{ form_widget(form.price) }}
     </div>
     <button type="submit" class="ui button sixteen wide field">Speichern</button>
