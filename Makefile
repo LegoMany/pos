@@ -18,7 +18,7 @@ start:
 ## Starts composer-install
 composer-install:
 	echo "$(EMOJI_package) Installing composer dependencies"
-	docker-compose exec php composer install
+	docker-compose exec php composer1 install
 
 ## Install mkcert on this computer, skips installation if already present
 install-mkcert:

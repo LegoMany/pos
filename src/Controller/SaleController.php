@@ -25,13 +25,6 @@ class SaleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $previousTransaction = $this->transactionRepository->getPreviousTransaction($sale);
-            if ($previousTransaction instanceof Transaction) {
-                $sale->receiptNumber = $previousTransaction->receiptNumber + 1;
-            } else {
-                $sale->receiptNumber = 1;
-            }
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($sale);
             $entityManager->flush();
