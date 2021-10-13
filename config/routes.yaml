@@ -20,6 +20,10 @@ order_delete:
   requirements:
     order: '\d+'
 
+transaction_drives:
+  path: /drives
+  controller: \Pos\Controller\PosController::showDrives
+
 sale_new:
   path: /sale/new
   controller: \Pos\Controller\SaleController::new

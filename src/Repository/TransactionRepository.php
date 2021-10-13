@@ -95,4 +95,21 @@ class TransactionRepository extends ServiceEntityRepository
         }
         return null;
     }
+
+    public function getGroupedByItemWithCount(): array
+    {
+        $connection = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT item, count(*) as count
+                FROM transaction
+                GROUP BY item order by count desc';
+
+        try {
+            $stmt = $connection->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (Throwable $e) {
+            return [];
+        }
+    }
 }

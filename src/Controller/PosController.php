@@ -69,4 +69,13 @@ class PosController extends AbstractController
             'printer' => $printer,
         ]);
     }
+
+    public function showDrives(): Response
+    {
+        $rows = $this->transactionRepository->getGroupedByItemWithCount();
+
+        return $this->render('pos/drives.html.twig', [
+            'rows' => $rows,
+        ]);
+    }
 }

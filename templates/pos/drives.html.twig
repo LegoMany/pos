@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="column sixteen wide">
+            <table class="ui celled striped table fixed">
+                <thead>
+                <tr>
+                    <th>Laden</th>
+                    <th>Anzahl</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for row in rows %}
+                    <tr>
+                        <td>{{ row.item }}</td>
+                        <td>{{ row.count }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
