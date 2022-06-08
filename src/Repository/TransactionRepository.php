@@ -5,6 +5,7 @@ namespace Pos\Repository;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\DBAL\FetchMode;
 use Doctrine\DBAL\Types\Types;
 use Pos\Entity\Transaction;
 use Throwable;
@@ -96,18 +97,36 @@ class TransactionRepository extends ServiceEntityRepository
         return null;
     }
 
-    public function getGroupedByItemWithCount(): array
+    public function getGroupedByItemWithCount(int $year): array
     {
         $connection = $this->getEntityManager()->getConnection();
 
         $sql = 'SELECT item, count(*) as count
                 FROM transaction
+                WHERE YEAR(date) = ' . $year . '
                 GROUP BY item order by count desc';
 
         try {
             $stmt = $connection->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
+        } catch (Throwable $e) {
+            return [];
+        }
+    }
+
+    public function getYears(): array
+    {
+        $connection = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT YEAR(date) as year
+                FROM transaction
+                GROUP BY YEAR(date)';
+
+        try {
+            $stmt = $connection->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(FetchMode::COLUMN);
         } catch (Throwable $e) {
             return [];
         }

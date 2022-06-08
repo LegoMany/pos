@@ -2,6 +2,7 @@
 
 namespace Pos\Controller;
 
+use DateTime;
 use Pos\Entity\Transaction;
 use Pos\Form\PrintType;
 use Pos\Printer\Printer;
@@ -70,12 +71,20 @@ class PosController extends AbstractController
         ]);
     }
 
-    public function showDrives(): Response
+    public function showDrives(Request $request): Response
     {
-        $rows = $this->transactionRepository->getGroupedByItemWithCount();
+        $selectedYear = $request->get('year');
+
+        $years = $this->transactionRepository->getYears();
+
+        $selectedYear = $selectedYear ?? end($years);
+
+        $rows = $this->transactionRepository->getGroupedByItemWithCount($selectedYear);
 
         return $this->render('pos/drives.html.twig', [
             'rows' => $rows,
+            'years' => $years,
+            'currentYear' => $selectedYear,
         ]);
     }
 }
