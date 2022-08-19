@@ -11,6 +11,12 @@
             <a href="{{ path('dashboard') }}">POS</a>
         </h1>
 
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-error">
+                {{ message }}
+            </div>
+        {% endfor %}
+
         {% block body %}{% endblock %}
         <script src="{{ asset('assets/semantic.min.js') }}"></script>
     </body>

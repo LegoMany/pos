@@ -18,14 +18,15 @@ class Item
     public ?int $id = null;
 
     /**
-     * @ORM\OneToOne(targetEntity=Product::class)
+     * @ORM\ManyToOne(targetEntity=Product::class)
+     * @ORM\JoinColumn(unique=false)
      */
     public ?Product $product;
 
     /**
      * @ORM\Column(type="integer")
      */
-    public ?int $count;
+    public ?int $quantity;
 
     /**
      * @ORM\ManyToOne(targetEntity=DebtNote::class, inversedBy="items")

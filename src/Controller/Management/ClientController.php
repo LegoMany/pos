@@ -2,6 +2,7 @@
 
 namespace Pos\Controller\Management;
 
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Pos\Entity\Client;
 use Pos\Form\ClientType;
 use Pos\Repository\ClientRepository;
@@ -64,9 +65,13 @@ class ClientController extends AbstractController
 
     public function delete(Client $client): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($client);
-        $entityManager->flush();
+        try {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($client);
+            $entityManager->flush();
+        } catch (ForeignKeyConstraintViolationException $exception) {
+            $this->addFlash('error', 'Kann nicht gelöscht werden, da es noch Einträge zu diesem Kunden gibt.');
+        }
 
         return $this->redirectToRoute('management_client_list');
     }

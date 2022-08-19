@@ -2,8 +2,6 @@
 
 namespace Pos\Entity;
 
-use DateTime;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,4 +21,9 @@ class Client
      * @ORM\Column(type="string")
      */
     public ?string $name;
+
+    /**
+     * @ORM\OneToOne(targetEntity=DebtNote::class, mappedBy="client")
+     */
+    public ?DebtNote $debtNote;
 }

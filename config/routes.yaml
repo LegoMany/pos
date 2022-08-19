@@ -42,9 +42,38 @@ sale_delete:
   requirements:
     sale: '\d+'
 
-register_show:
+register:
   path: /register
-  controller: \Pos\Controller\RegisterController::show
+  controller: \Pos\Controller\DashboardController::register
+
+register_debtnote_list:
+  path: /register/sale
+  controller: \Pos\Controller\Register\DebtNoteController::list
+register_debtnote_new:
+  path: /register/debtnotes/new
+  controller: \Pos\Controller\Register\DebtNoteController::new
+register_debtnote_show:
+  path: /register/debtnotes/{note}
+  controller: \Pos\Controller\Register\DebtNoteController::show
+  requirements:
+    note: '\d+'
+register_debtnote_delete:
+  path: /register/debtnotes/{note}/delete
+  controller: \Pos\Controller\Register\DebtNoteController::delete
+  requirements:
+    note: '\d+'
+register_debtnote_addproduct:
+  path: /register/debtnotes/{note}/add/{product}
+  controller: \Pos\Controller\Register\DebtNoteController::addProduct
+  requirements:
+    note: '\d+'
+    product: '\d+'
+register_debtnote_removeproduct:
+  path: /register/debtnotes/{note}/remove/{product}
+  controller: \Pos\Controller\Register\DebtNoteController::removeProduct
+  requirements:
+    note: '\d+'
+    product: '\d+'
 
 management:
   path: /management

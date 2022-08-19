@@ -16,4 +16,9 @@ class DashboardController extends AbstractController
     {
         return $this->render('management/show.html.twig');
     }
+
+    public function register(): Response
+    {
+        return $this->render('register/show.html.twig');
+    }
 }
