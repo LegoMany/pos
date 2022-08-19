@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="column">
+            <h2>Produkte</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column sixteen wide">
+            <a class="ui button fluid" href="{{ path('register_product_new') }}">Neu</a>
+        </div>
+    </div>
+    <div class="row">
+        <ul>
+            {% for product in products %}
+                <li>
+                    <a href="{{ path('register_product_edit', {'product': product.id}) }}">
+                        {{ product.name }} - {{ product.price }}
+                    </a>
+                    <a href="{{ path('register_product_delete', {'product': product.id}) }}"><i class="trash icon red"></i></a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

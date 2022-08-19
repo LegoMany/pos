@@ -2,6 +2,11 @@
 
 {% block body %}
     <div class="row">
+        <div class="column">
+            <h2>Produkte</h2>
+        </div>
+    </div>
+    <div class="row">
         <div class="column sixteen wide">
             {{ form_start(printForm, {'action': path('print_months'), 'method': 'GET', 'attr': {'class': 'ui form'}}) }}
             <div class="fields inline">

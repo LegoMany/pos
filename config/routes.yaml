@@ -41,3 +41,24 @@ sale_delete:
   controller: \Pos\Controller\SaleController::delete
   requirements:
     sale: '\d+'
+
+register_show:
+  path: /register
+  controller: \Pos\Controller\RegisterController::show
+
+register_product_list:
+  path: /register/products
+  controller: \Pos\Controller\ProductController::list
+register_product_new:
+  path: /register/products/new
+  controller: \Pos\Controller\ProductController::new
+register_product_edit:
+  path: /register/products/{product}
+  controller: \Pos\Controller\ProductController::edit
+  requirements:
+    product: '\d+'
+register_product_delete:
+  path: /register/products/{product}/delete
+  controller: \Pos\Controller\ProductController::delete
+  requirements:
+    order: '\d+'

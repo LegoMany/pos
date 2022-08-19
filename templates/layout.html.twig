@@ -7,7 +7,9 @@
         <link rel="stylesheet" href="{{ asset('assets/main.css') }}">
     </head>
     <body class="ui container">
-        <h1 class="header">POS</h1>
+        <h1 class="header">
+            <a href="{{ path('dashboard') }}">POS</a>
+        </h1>
         <div class="ui grid">
             {% block body %}{% endblock %}
         </div>
