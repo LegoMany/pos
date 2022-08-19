@@ -37,4 +37,6 @@
             {% endfor %}
         </div>
     {% endfor %}
+
+    {% include 'includes/print/backButton.html.twig' with {'url': path('dashboard')} %}
 {% endblock %}

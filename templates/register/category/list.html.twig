@@ -23,4 +23,6 @@
             {% endfor %}
         </ul>
     </div>
+
+    {% include 'includes/print/backButton.html.twig' with {'url': path('register_product_list')} %}
 {% endblock %}

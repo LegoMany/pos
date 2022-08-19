@@ -21,4 +21,6 @@
     </div>
     <button type="submit" class="ui button sixteen wide field">Speichern</button>
     {{ form_end(form) }}
+
+    {% include 'includes/print/backButton.html.twig' with {'url': path('register_product_list')} %}
 {% endblock %}
