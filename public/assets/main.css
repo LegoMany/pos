@@ -7,3 +7,17 @@ h1.header {
 .ui.table {
     border-spacing: 2px;
 }
+
+.bold {
+    font-weight: bold;
+}
+
+.bigtext {
+    font-size: 4rem;
+}
+
+.ui.button.control {
+    height: 150px;
+    line-height: 100px;
+    font-size: 25px;
+}

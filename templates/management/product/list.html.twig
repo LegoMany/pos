@@ -9,34 +9,46 @@
         </div>
         <div class="row">
             <div class="column sixteen wide">
-                <a class="ui button fluid" href="{{ path('management_product_new') }}">Neu</a>
+                <a class="ui button fluid massive" href="{{ path('management_product_new') }}">Neu</a>
             </div>
         </div>
-
         <div class="row">
             <div class="column sixteen wide">
-                <a class="ui button fluid" href="{{ path('management_product_category_list') }}">Kategorien</a>
+                <a class="ui button fluid massive" href="{{ path('management_product_category_list') }}">Kategorien</a>
             </div>
         </div>
     </div>
 
-    {% for category in categories %}
-        <h2>{{ category.name }}</h2>
-        <div class="doubling stackable three column ui grid container">
-            {% for product in category.products %}
-                <div class="column">
-                    <div class="ui buttons fluid">
-                        <a class="ui button" href="{{ path('management_product_edit', {'product': product.id}) }}">
-                            {{ product.name }} - {{ product.price | number_format(2, ',', '.') }} €
-                        </a>
-                        <a class="ui icon button red" href="{{ path('management_product_delete', {'product': product.id}) }}">
-                            <i class="trash icon white"></i>
-                        </a>
+    {% if categories %}
+        {% for category in categories %}
+            <h2>{{ category.name }}</h2>
+            <div class="doubling stackable four column ui grid container">
+                {% for product in category.products %}
+                    <div class="column">
+                        <div class="ui cards">
+                            <div class="card">
+                                <div class="content bold bigtext center aligned">
+                                    {{ product.name }}
+                                </div>
+                                <div class="extra content">
+                                    <div class="ui two buttons">
+                                        <a class="ui blue button massive icon" href="{{ path('management_product_edit', {'product': product.id}) }}">
+                                            <i class="edit icon white"></i>
+                                        </a>
+                                        <a class="ui red button massive icon" href="{{ path('management_product_delete', {'product': product.id}) }}">
+                                            <i class="trash icon white"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+        {% else %}
+        <h2>Keine Produkte vorhanden</h2>
+    {% endif %}
 
     {% include 'includes/print/backButton.html.twig' with {'url': path('dashboard')} %}
 {% endblock %}
