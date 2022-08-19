@@ -30,6 +30,7 @@ services:
       - .env
     volumes:
       - mysql:/var/lib/mysql/
+      - .data/dumps:/.data/dumps
     ports:
       - ${SQLPORT}:3306
 
