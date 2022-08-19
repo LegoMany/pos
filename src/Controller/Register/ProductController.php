@@ -1,9 +1,10 @@
 <?php
 
-namespace Pos\Controller;
+namespace Pos\Controller\Register;
 
 use Pos\Entity\Product;
 use Pos\Form\ProductType;
+use Pos\Repository\CategoryRepository;
 use Pos\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,17 +12,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends AbstractController
 {
-    protected ProductRepository $productRepository;
+    private ProductRepository $productRepository;
+    private CategoryRepository $categoryRepository;
 
-    public function __construct(ProductRepository $ProductRepository)
+    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository)
     {
-        $this->productRepository = $ProductRepository;
+        $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     public function list(): Response
     {
         return $this->render('register/product/list.html.twig', [
-            'products' => $this->productRepository->findAll(),
+            'categories' => $this->categoryRepository->findAll(),
         ]);
     }
 

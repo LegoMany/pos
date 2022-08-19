@@ -2,14 +2,15 @@
 
 namespace Pos\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="product")
- * @ORM\Entity(repositoryClass="Pos\Repository\ProductRepository")
+ * @ORM\Table(name="category")
+ * @ORM\Entity(repositoryClass="Pos\Repository\CategoryRepository")
  */
-class Product
+class Category
 {
     /**
      * @ORM\Id()
@@ -24,12 +25,7 @@ class Product
     public ?string $name;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="category")
      */
-    public ?float $price;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
-     */
-    public ?Category $category;
+    public ?Collection $products;
 }

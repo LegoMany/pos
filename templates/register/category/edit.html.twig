@@ -3,21 +3,13 @@
 {% block body %}
     <div class="row">
         <div class="column">
-            <h2>Neues Produkt</h2>
+            <h2>Kategorie bearbeiten</h2>
         </div>
     </div>
     {{ form_start(form, {'attr': {'class': 'ui form'}}) }}
     <div class="field">
         <label>Name</label>
-        {{ form_widget(form.name, {'attr': {'autofocus': ''}}) }}
-    </div>
-    <div class="field">
-        <label>Preis</label>
-        {{ form_widget(form.price) }}
-    </div>
-    <div class="field">
-        <label>Preis</label>
-        {{ form_widget(form.category) }}
+        {{ form_widget(form.name) }}
     </div>
     <button type="submit" class="ui button sixteen wide field">Speichern</button>
     {{ form_end(form) }}

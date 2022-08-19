@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="column">
+            <h2>Kategorien</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column sixteen wide">
+            <a class="ui button fluid" href="{{ path('register_product_category_new') }}">Neu</a>
+        </div>
+    </div>
+    <div class="row">
+        <ul>
+            {% for category in categories %}
+                <li>
+                    <a href="{{ path('register_product_category_edit', {'category': category.id}) }}">
+                        {{ category.name }}
+                    </a>
+                    <a href="{{ path('register_product_category_delete', {'category': category.id}) }}"><i class="trash icon red"></i></a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

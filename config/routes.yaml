@@ -48,17 +48,34 @@ register_show:
 
 register_product_list:
   path: /register/products
-  controller: \Pos\Controller\ProductController::list
+  controller: \Pos\Controller\Register\ProductController::list
 register_product_new:
   path: /register/products/new
-  controller: \Pos\Controller\ProductController::new
+  controller: \Pos\Controller\Register\ProductController::new
 register_product_edit:
   path: /register/products/{product}
-  controller: \Pos\Controller\ProductController::edit
+  controller: \Pos\Controller\Register\ProductController::edit
   requirements:
     product: '\d+'
 register_product_delete:
   path: /register/products/{product}/delete
-  controller: \Pos\Controller\ProductController::delete
+  controller: \Pos\Controller\Register\ProductController::delete
   requirements:
     order: '\d+'
+
+register_product_category_list:
+  path: /register/product/categories
+  controller: \Pos\Controller\Register\CategoryController::list
+register_product_category_new:
+  path: /register/product/categories/new
+  controller: \Pos\Controller\Register\CategoryController::new
+register_product_category_edit:
+  path: /register/product/categories/{category}
+  controller: \Pos\Controller\Register\CategoryController::edit
+  requirements:
+    category: '\d+'
+register_product_category_delete:
+  path: /register/product/categories/{category}/delete
+  controller: \Pos\Controller\Register\CategoryController::delete
+  requirements:
+    category: '\d+'

@@ -1,20 +1,22 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    <div class="row">
-        <div class="column">
-            <h2>Dashboard</h2>
+    <div class="ui grid">
+        <div class="row">
+            <div class="column">
+                <h2>Dashboard</h2>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="column five wide">
-            <a class="ui button fluid" href="{{ path('register_show') }}">Kasse</a>
-        </div>
-        <div class="column five wide">
-            <a class="ui button fluid" href="{{ path('register_product_list') }}">Produkte</a>
-        </div>
-        <div class="column five wide">
-            <a class="ui button fluid" href="{{ path('transactions_list') }}">Transaktionen</a>
+        <div class="row">
+            <div class="column five wide">
+                <a class="ui button fluid" href="{{ path('register_show') }}">Kasse</a>
+            </div>
+            <div class="column five wide">
+                <a class="ui button fluid" href="{{ path('register_product_list') }}">Produkte</a>
+            </div>
+            <div class="column five wide">
+                <a class="ui button fluid" href="{{ path('transactions_list') }}">Transaktionen</a>
+            </div>
         </div>
     </div>
 {% endblock %}

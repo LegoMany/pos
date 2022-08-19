@@ -2,8 +2,10 @@
 
 namespace Pos\Form;
 
+use Pos\Entity\Category;
 use Pos\Entity\Product;
 use Pos\Form\Transformer\NumberToLocalizedTransformer;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,7 +30,17 @@ class ProductType extends AbstractType
             ->add(
                 'price',
                 TextType::class
-            );
+            )
+            ->add(
+                'category',
+                EntityType::class,
+                [
+                    'required' => true,
+                    'class' => Category::class,
+                    'choice_label' => 'name',
+                ]
+
+            );;
 
         $builder->get('price')->addModelTransformer($this->numberTransformer);
     }

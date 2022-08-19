@@ -1,26 +1,40 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    <div class="row">
-        <div class="column">
-            <h2>Produkte</h2>
+    <div class="ui grid">
+        <div class="row">
+            <div class="column">
+                <h2>Produkte</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column sixteen wide">
+                <a class="ui button fluid" href="{{ path('register_product_new') }}">Neu</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column sixteen wide">
+                <a class="ui button fluid" href="{{ path('register_product_category_list') }}">Kategorien</a>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="column sixteen wide">
-            <a class="ui button fluid" href="{{ path('register_product_new') }}">Neu</a>
-        </div>
-    </div>
-    <div class="row">
-        <ul>
-            {% for product in products %}
-                <li>
-                    <a href="{{ path('register_product_edit', {'product': product.id}) }}">
-                        {{ product.name }} - {{ product.price }}
-                    </a>
-                    <a href="{{ path('register_product_delete', {'product': product.id}) }}"><i class="trash icon red"></i></a>
-                </li>
+
+    {% for category in categories %}
+        <h2>{{ category.name }}</h2>
+        <div class="doubling stackable three column ui grid container">
+            {% for product in category.products %}
+                <div class="column">
+                    <div class="ui buttons fluid">
+                        <a class="ui button" href="{{ path('register_product_edit', {'product': product.id}) }}">
+                            {{ product.name }} - {{ product.price | number_format(2, ',', '.') }} €
+                        </a>
+                        <a class="ui icon button red" href="{{ path('register_product_delete', {'product': product.id}) }}">
+                            <i class="trash icon white"></i>
+                        </a>
+                    </div>
+                </div>
             {% endfor %}
-        </ul>
-    </div>
+        </div>
+    {% endfor %}
 {% endblock %}

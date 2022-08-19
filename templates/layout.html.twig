@@ -10,9 +10,8 @@
         <h1 class="header">
             <a href="{{ path('dashboard') }}">POS</a>
         </h1>
-        <div class="ui grid">
-            {% block body %}{% endblock %}
-        </div>
+
+        {% block body %}{% endblock %}
         <script src="{{ asset('assets/semantic.min.js') }}"></script>
     </body>
 </html>

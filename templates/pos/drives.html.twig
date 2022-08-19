@@ -1,39 +1,41 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    <div class="row">
-        <div class="column sixteen wide">
-            <form method="GET">
-                <label for="year">Jahr</label>
-                <select id="year" name="year" onchange="this.form.submit()">
-                    {% for year in years %}
-                        <option value="{{ year }}"
-                                {{ year == currentYear ? 'selected' }}
-                        >{{ year }}</option>
-                    {% endfor %}
-                </select>
-            </form>
+    <div class="ui grid">
+        <div class="row">
+            <div class="column sixteen wide">
+                <form method="GET">
+                    <label for="year">Jahr</label>
+                    <select id="year" name="year" onchange="this.form.submit()">
+                        {% for year in years %}
+                            <option value="{{ year }}"
+                                    {{ year == currentYear ? 'selected' }}
+                            >{{ year }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="column sixteen wide">
-            <table class="ui celled striped table fixed">
-                <thead>
-                <tr>
-                    <th>Laden</th>
-                    <th>Anzahl</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for row in rows %}
+        <div class="row">
+            <div class="column sixteen wide">
+                <table class="ui celled striped table fixed">
+                    <thead>
                     <tr>
-                        <td>{{ row.item }}</td>
-                        <td>{{ row.count }}</td>
+                        <th>Laden</th>
+                        <th>Anzahl</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            <td>{{ row.item }}</td>
+                            <td>{{ row.count }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 {% endblock %}
