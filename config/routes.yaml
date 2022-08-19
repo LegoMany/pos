@@ -1,10 +1,14 @@
-pos_index:
+dashboard:
   path: /
-  controller: \Pos\Controller\PosController::index
+  controller: \Pos\Controller\DashboardController::main
+
+transactions_list:
+  path: /produse
+  controller: \Pos\Controller\TransactionController::list
 
 print_months:
   path: /print
-  controller: \Pos\Controller\PosController::printMonths
+  controller: \Pos\Controller\TransactionController::printMonths
 
 order_new:
   path: /order/new
@@ -22,7 +26,7 @@ order_delete:
 
 transaction_drives:
   path: /drives
-  controller: \Pos\Controller\PosController::showDrives
+  controller: \Pos\Controller\TransactionController::showDrives
 
 sale_new:
   path: /sale/new

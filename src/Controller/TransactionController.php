@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PosController extends AbstractController
+class TransactionController extends AbstractController
 {
     protected TransactionRepository $transactionRepository;
 
@@ -22,7 +22,7 @@ class PosController extends AbstractController
         $this->transactionRepository = $transactionRepository;
     }
 
-    public function index(): Response
+    public function list(): Response
     {
         $printForm = $this->createForm(PrintType::class);
 
