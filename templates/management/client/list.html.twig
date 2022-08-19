@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div class="ui grid">
+        <div class="row">
+            <div class="column">
+                <h2>Kunden</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column sixteen wide">
+                <a class="ui button fluid" href="{{ path('management_client_new') }}">Neu</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="doubling stackable three column ui grid container">
+        {% for client in clients %}
+            <div class="column">
+                <div class="ui buttons fluid">
+                    <a class="ui button" href="{{ path('management_client_edit', {'client': client.id}) }}">
+                        {{ client.name }}
+                    </a>
+                    <a class="ui icon button red" href="{{ path('management_client_delete', {'client': client.id}) }}">
+                        <i class="trash icon white"></i>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% include 'includes/print/backButton.html.twig' with {'url': path('management')} %}
+{% endblock %}

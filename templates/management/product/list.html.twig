@@ -9,13 +9,13 @@
         </div>
         <div class="row">
             <div class="column sixteen wide">
-                <a class="ui button fluid" href="{{ path('register_product_new') }}">Neu</a>
+                <a class="ui button fluid" href="{{ path('management_product_new') }}">Neu</a>
             </div>
         </div>
 
         <div class="row">
             <div class="column sixteen wide">
-                <a class="ui button fluid" href="{{ path('register_product_category_list') }}">Kategorien</a>
+                <a class="ui button fluid" href="{{ path('management_product_category_list') }}">Kategorien</a>
             </div>
         </div>
     </div>
@@ -26,10 +26,10 @@
             {% for product in category.products %}
                 <div class="column">
                     <div class="ui buttons fluid">
-                        <a class="ui button" href="{{ path('register_product_edit', {'product': product.id}) }}">
+                        <a class="ui button" href="{{ path('management_product_edit', {'product': product.id}) }}">
                             {{ product.name }} - {{ product.price | number_format(2, ',', '.') }} €
                         </a>
-                        <a class="ui icon button red" href="{{ path('register_product_delete', {'product': product.id}) }}">
+                        <a class="ui icon button red" href="{{ path('management_product_delete', {'product': product.id}) }}">
                             <i class="trash icon white"></i>
                         </a>
                     </div>

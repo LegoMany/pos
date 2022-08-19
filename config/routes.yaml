@@ -46,36 +46,56 @@ register_show:
   path: /register
   controller: \Pos\Controller\RegisterController::show
 
-register_product_list:
-  path: /register/products
-  controller: \Pos\Controller\Register\ProductController::list
-register_product_new:
-  path: /register/products/new
-  controller: \Pos\Controller\Register\ProductController::new
-register_product_edit:
-  path: /register/products/{product}
-  controller: \Pos\Controller\Register\ProductController::edit
+management:
+  path: /management
+  controller: \Pos\Controller\DashboardController::management
+management_product_list:
+  path: /management/products
+  controller: \Pos\Controller\Management\ProductController::list
+management_product_new:
+  path: /management/products/new
+  controller: \Pos\Controller\Management\ProductController::new
+management_product_edit:
+  path: /management/products/{product}
+  controller: \Pos\Controller\Management\ProductController::edit
   requirements:
     product: '\d+'
-register_product_delete:
-  path: /register/products/{product}/delete
-  controller: \Pos\Controller\Register\ProductController::delete
+management_product_delete:
+  path: /management/products/{product}/delete
+  controller: \Pos\Controller\Management\ProductController::delete
   requirements:
     order: '\d+'
 
-register_product_category_list:
-  path: /register/product/categories
-  controller: \Pos\Controller\Register\CategoryController::list
-register_product_category_new:
-  path: /register/product/categories/new
-  controller: \Pos\Controller\Register\CategoryController::new
-register_product_category_edit:
-  path: /register/product/categories/{category}
-  controller: \Pos\Controller\Register\CategoryController::edit
+management_product_category_list:
+  path: /management/product/categories
+  controller: \Pos\Controller\Management\CategoryController::list
+management_product_category_new:
+  path: /management/product/categories/new
+  controller: \Pos\Controller\Management\CategoryController::new
+management_product_category_edit:
+  path: /management/product/categories/{category}
+  controller: \Pos\Controller\Management\CategoryController::edit
   requirements:
     category: '\d+'
-register_product_category_delete:
-  path: /register/product/categories/{category}/delete
-  controller: \Pos\Controller\Register\CategoryController::delete
+management_product_category_delete:
+  path: /management/product/categories/{category}/delete
+  controller: \Pos\Controller\Management\CategoryController::delete
   requirements:
     category: '\d+'
+
+management_client_list:
+  path: /management/client
+  controller: \Pos\Controller\Management\ClientController::list
+management_client_new:
+  path: /management/client/new
+  controller: \Pos\Controller\Management\ClientController::new
+management_client_edit:
+  path: /management/client/{client}
+  controller: \Pos\Controller\Management\ClientController::edit
+  requirements:
+    client: '\d+'
+management_client_delete:
+  path: /management/client/{client}/delete
+  controller: \Pos\Controller\Management\ClientController::delete
+  requirements:
+    client: '\d+'

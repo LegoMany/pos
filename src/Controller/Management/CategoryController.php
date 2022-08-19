@@ -1,11 +1,9 @@
 <?php
 
-namespace Pos\Controller\Register;
+namespace Pos\Controller\Management;
 
 use Pos\Entity\Category;
-use Pos\Entity\Product;
 use Pos\Form\CategoryType;
-use Pos\Form\ProductType;
 use Pos\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +20,7 @@ class CategoryController extends AbstractController
 
     public function list(): Response
     {
-        return $this->render('register/category/list.html.twig', [
+        return $this->render('management/category/list.html.twig', [
             'categories' => $this->categoryRepository->findAll(),
         ]);
     }
@@ -38,10 +36,10 @@ class CategoryController extends AbstractController
             $entityManager->persist($category);
             $entityManager->flush();
 
-            return $this->redirectToRoute('register_product_category_list');
+            return $this->redirectToRoute('management_product_category_list');
         }
 
-        return $this->render('register/category/new.html.twig', [
+        return $this->render('management/category/new.html.twig', [
             'category' => $category,
             'form' => $form->createView(),
         ]);
@@ -55,10 +53,10 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('register_product_category_list');
+            return $this->redirectToRoute('management_product_category_list');
         }
 
-        return $this->render('register/category/edit.html.twig', [
+        return $this->render('management/category/edit.html.twig', [
             'category' => $category,
             'form' => $form->createView(),
         ]);
@@ -70,6 +68,6 @@ class CategoryController extends AbstractController
         $entityManager->remove($category);
         $entityManager->flush();
 
-        return $this->redirectToRoute('register_product_category_list');
+        return $this->redirectToRoute('management_product_category_list');
     }
 }

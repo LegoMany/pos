@@ -8,21 +8,21 @@
     </div>
     <div class="row">
         <div class="column sixteen wide">
-            <a class="ui button fluid" href="{{ path('register_product_category_new') }}">Neu</a>
+            <a class="ui button fluid" href="{{ path('management_product_category_new') }}">Neu</a>
         </div>
     </div>
     <div class="row">
         <ul>
             {% for category in categories %}
                 <li>
-                    <a href="{{ path('register_product_category_edit', {'category': category.id}) }}">
+                    <a href="{{ path('management_product_category_edit', {'category': category.id}) }}">
                         {{ category.name }}
                     </a>
-                    <a href="{{ path('register_product_category_delete', {'category': category.id}) }}"><i class="trash icon red"></i></a>
+                    <a href="{{ path('management_product_category_delete', {'category': category.id}) }}"><i class="trash icon red"></i></a>
                 </li>
             {% endfor %}
         </ul>
     </div>
 
-    {% include 'includes/print/backButton.html.twig' with {'url': path('register_product_list')} %}
+    {% include 'includes/print/backButton.html.twig' with {'url': path('management_product_list')} %}
 {% endblock %}

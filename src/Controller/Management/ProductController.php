@@ -1,6 +1,6 @@
 <?php
 
-namespace Pos\Controller\Register;
+namespace Pos\Controller\Management;
 
 use Pos\Entity\Product;
 use Pos\Form\ProductType;
@@ -23,7 +23,7 @@ class ProductController extends AbstractController
 
     public function list(): Response
     {
-        return $this->render('register/product/list.html.twig', [
+        return $this->render('management/product/list.html.twig', [
             'categories' => $this->categoryRepository->findAll(),
         ]);
     }
@@ -39,10 +39,10 @@ class ProductController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            return $this->redirectToRoute('register_product_list');
+            return $this->redirectToRoute('management_product_list');
         }
 
-        return $this->render('register/product/new.html.twig', [
+        return $this->render('management/product/new.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
         ]);
@@ -56,10 +56,10 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('register_product_list');
+            return $this->redirectToRoute('management_product_list');
         }
 
-        return $this->render('register/product/edit.html.twig', [
+        return $this->render('management/product/edit.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
         ]);
@@ -71,6 +71,6 @@ class ProductController extends AbstractController
         $entityManager->remove($product);
         $entityManager->flush();
 
-        return $this->redirectToRoute('register_product_list');
+        return $this->redirectToRoute('management_product_list');
     }
 }
