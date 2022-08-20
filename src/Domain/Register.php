@@ -5,7 +5,7 @@ namespace Pos\Domain;
 
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Pos\Entity\DebtNote;
+use Pos\Entity\Sale;
 use Pos\Entity\Transaction;
 use Pos\Repository\TransactionRepository;
 
@@ -20,7 +20,7 @@ class Register
         $this->transactionRepository = $transactionRepository;
     }
 
-    public function closeDebtNote(DebtNote $note): void
+    public function closeSale(Sale $note): void
     {
         $todaysDate = new DateTime();
 

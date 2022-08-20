@@ -4,7 +4,7 @@ namespace Pos\Form;
 
 use Doctrine\ORM\EntityRepository;
 use Pos\Entity\Client;
-use Pos\Entity\DebtNote;
+use Pos\Entity\Sale;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,7 +25,7 @@ class DebtNoteType extends AbstractType
                     'placeholder' => 'Kunde auswählen',
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('c')
-                            ->leftjoin('Pos:DebtNote', 'n', 'with', 'n.client = c.id')
+                            ->leftjoin('Pos:Sale', 'n', 'with', 'n.client = c.id')
                             ->andWhere('n.id is null');
                     },
 
@@ -36,7 +36,7 @@ class DebtNoteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => DebtNote::class,
+            'data_class' => Sale::class,
         ]);
     }
 }

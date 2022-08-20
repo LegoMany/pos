@@ -23,7 +23,7 @@ class Client
     public ?string $name;
 
     /**
-     * @ORM\OneToOne(targetEntity=DebtNote::class, mappedBy="client")
+     * @ORM\OneToOne(targetEntity=Sale::class, mappedBy="client")
      */
-    public ?DebtNote $debtNote;
+    public ?Sale $sale;
 }

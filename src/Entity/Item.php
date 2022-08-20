@@ -29,7 +29,7 @@ class Item
     public ?int $quantity;
 
     /**
-     * @ORM\ManyToOne(targetEntity=DebtNote::class, inversedBy="items")
+     * @ORM\ManyToOne(targetEntity=Sale::class, inversedBy="items")
      */
-    public ?DebtNote $debtNote;
+    public ?Sale $sale;
 }

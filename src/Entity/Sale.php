@@ -2,14 +2,15 @@
 
 namespace Pos\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="debt_note")
- * @ORM\Entity(repositoryClass="Pos\Repository\DebtNoteRepository")
+ * @ORM\Table(name="sale")
+ * @ORM\Entity(repositoryClass="Pos\Repository\SaleRepository")
  */
-class DebtNote
+class Sale
 {
     /**
      * @ORM\Id()
@@ -19,14 +20,19 @@ class DebtNote
     public ?int $id = null;
 
     /**
-     * @ORM\OneToOne(targetEntity=Client::class, inversedBy="debtNote")
+     * @ORM\OneToOne(targetEntity=Client::class, inversedBy="sale")
      */
     public ?Client $client;
 
     /**
-     * @ORM\OneToMany(targetEntity=Item::class, mappedBy="debtNote", cascade="persist")
+     * @ORM\OneToMany(targetEntity=Item::class, mappedBy="sale", cascade="persist")
      */
     public ?Collection $items;
+
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
 
     public function addProduct(Product $product): void
     {
@@ -42,7 +48,7 @@ class DebtNote
 
         $item = new Item();
         $item->product = $product;
-        $item->debtNote = $this;
+        $item->sale = $this;
         $item->quantity = 1;
         $this->items->add($item);
     }

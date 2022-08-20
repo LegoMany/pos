@@ -4,37 +4,37 @@ namespace Pos\Controller\Register;
 
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Pos\Domain\Register;
-use Pos\Entity\DebtNote;
+use Pos\Entity\Sale;
 use Pos\Entity\Item;
 use Pos\Entity\Product;
 use Pos\Form\DebtNoteType;
 use Pos\Repository\CategoryRepository;
-use Pos\Repository\DebtNoteRepository;
+use Pos\Repository\SaleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class DebtNoteController extends AbstractController
 {
-    private DebtNoteRepository $debtNoteRepository;
+    private SaleRepository $saleRepository;
     private CategoryRepository $categoryRepository;
 
-    public function __construct(DebtNoteRepository $debtNoteRepository, CategoryRepository $categoryRepository)
+    public function __construct(SaleRepository $saleRepository, CategoryRepository $categoryRepository)
     {
-        $this->debtNoteRepository = $debtNoteRepository;
+        $this->saleRepository = $saleRepository;
         $this->categoryRepository = $categoryRepository;
     }
 
     public function list(): Response
     {
         return $this->render('register/debtnotes/list.html.twig', [
-            'notes' => $this->debtNoteRepository->findAll(),
+            'notes' => $this->saleRepository->findDebtNotes(),
         ]);
     }
 
     public function new(Request $request): Response
     {
-        $note = new DebtNote();
+        $note = new Sale();
         $form = $this->createForm(DebtNoteType::class, $note);
         $form->handleRequest($request);
 
@@ -54,7 +54,7 @@ class DebtNoteController extends AbstractController
         ]);
     }
 
-    public function show(Request $request, DebtNote $note): Response
+    public function show(Request $request, Sale $note): Response
     {
         return $this->render('register/debtnotes/show.html.twig', [
             'categories' => $this->categoryRepository->findAll(),
@@ -62,7 +62,7 @@ class DebtNoteController extends AbstractController
         ]);
     }
 
-    public function addProduct(DebtNote $note, Product $product): Response
+    public function addProduct(Sale $note, Product $product): Response
     {
         $note->addProduct($product);
         $this->getDoctrine()->getManager()->flush();
@@ -71,7 +71,7 @@ class DebtNoteController extends AbstractController
         ]);
     }
 
-    public function removeProduct(DebtNote $note, Product $product): Response
+    public function removeProduct(Sale $note, Product $product): Response
     {
         $item = $note->items->filter(function (Item $item) use ($product) {
             return $item->product->id === $product->id;
@@ -88,13 +88,13 @@ class DebtNoteController extends AbstractController
         ]);
     }
 
-    public function close(DebtNote $note, Register $register): Response
+    public function close(Sale $note, Register $register): Response
     {
-        $register->closeDebtNote($note);
+        $register->closeSale($note);
         return $this->redirectToRoute('register_debtnote_list');
     }
 
-    public function delete(DebtNote $note): Response
+    public function delete(Sale $note): Response
     {
         try {
             $entityManager = $this->getDoctrine()->getManager();

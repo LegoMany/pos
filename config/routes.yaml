@@ -47,7 +47,7 @@ register:
   controller: \Pos\Controller\DashboardController::register
 
 register_debtnote_list:
-  path: /register/sale
+  path: /register/debtnotes
   controller: \Pos\Controller\Register\DebtNoteController::list
 register_debtnote_new:
   path: /register/debtnotes/new
@@ -74,12 +74,38 @@ register_debtnote_removeproduct:
   requirements:
     note: '\d+'
     product: '\d+'
-
 register_debtnote_close:
   path: /register/debtnotes/{note}/close
   controller: \Pos\Controller\Register\DebtNoteController::close
   requirements:
     note: '\d+'
+
+register_sale_new:
+  path: /register/new
+  controller: \Pos\Controller\Register\SaleController::new
+register_sale_show:
+  path: /register/{sale}
+  controller: \Pos\Controller\Register\SaleController::show
+register_sale_back:
+  path: /register/{sale}/back
+  controller: \Pos\Controller\Register\SaleController::back
+register_sale_addproduct:
+  path: /register/sale/{sale}/add/{product}
+  controller: \Pos\Controller\Register\SaleController::addProduct
+  requirements:
+    sale: '\d+'
+    product: '\d+'
+register_sale_removeproduct:
+  path: /register/sale/{sale}/remove/{product}
+  controller: \Pos\Controller\Register\SaleController::removeProduct
+  requirements:
+    sale: '\d+'
+    product: '\d+'
+register_sale_close:
+  path: /register/sale/{sale}/close
+  controller: \Pos\Controller\Register\SaleController::close
+  requirements:
+    sale: '\d+'
 
 management:
   path: /management
