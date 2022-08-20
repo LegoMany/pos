@@ -1,33 +1,37 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    <div class="row">
-        <h2>Bestellung bearbeiten</h2>
-    </div>
-    {{ form_start(form, {'attr': {'class': 'ui form'}}) }}
-    <div class="fields">
-        <div class="field">
-            <label>Tag</label>
-            {{ form_widget(form.date.day) }}
+    <div class="ui grid">
+        <div class="row">
+            <div class="column">
+                <h2>Bestellung bearbeiten</h2>
+            </div>
         </div>
-        <div class="field">
-            <label>Monat</label>
-            {{ form_widget(form.date.month) }}
+        {{ form_start(form, {'attr': {'class': 'ui form'}}) }}
+        <div class="fields">
+            <div class="field">
+                <label>Tag</label>
+                {{ form_widget(form.date.day) }}
+            </div>
+            <div class="field">
+                <label>Monat</label>
+                {{ form_widget(form.date.month) }}
+            </div>
+            <div class="field">
+                <label>Jahr</label>
+                {{ form_widget(form.date.year) }}
+            </div>
         </div>
-        <div class="field">
-            <label>Jahr</label>
-            {{ form_widget(form.date.year) }}
-        </div>
-    </div>
 
-    <div class="field">
-        <label>Text</label>
-        {{ form_widget(form.item) }}
+        <div class="field">
+            <label>Text</label>
+            {{ form_widget(form.item) }}
+        </div>
+        <div class="field">
+            <label>Preis</label>
+            {{ form_widget(form.price) }}
+        </div>
+        <button type="submit" class="ui button sixteen wide field">Speichern</button>
+        {{ form_end(form) }}
     </div>
-    <div class="field">
-        <label>Preis</label>
-        {{ form_widget(form.price) }}
-    </div>
-    <button type="submit" class="ui button sixteen wide field">Speichern</button>
-    {{ form_end(form) }}
 {% endblock %}

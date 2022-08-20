@@ -1,6 +1,6 @@
 <?php
 
-namespace Pos\Printer;
+namespace Pos\Domain\Printer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Pos\Entity\Transaction;

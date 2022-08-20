@@ -2,10 +2,9 @@
 
 namespace Pos\Controller;
 
-use DateTime;
+use Pos\Domain\Printer\Printer;
 use Pos\Entity\Transaction;
 use Pos\Form\PrintType;
-use Pos\Printer\Printer;
 use Pos\Repository\TransactionRepository;
 use Pos\Utility\ArrayUtility;
 use Pos\Utility\NumberUtility;
@@ -13,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PosController extends AbstractController
+class TransactionController extends AbstractController
 {
     protected TransactionRepository $transactionRepository;
 
@@ -22,7 +21,7 @@ class PosController extends AbstractController
         $this->transactionRepository = $transactionRepository;
     }
 
-    public function index(): Response
+    public function list(): Response
     {
         $printForm = $this->createForm(PrintType::class);
 

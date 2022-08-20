@@ -1,10 +1,14 @@
-pos_index:
+dashboard:
   path: /
-  controller: \Pos\Controller\PosController::index
+  controller: \Pos\Controller\DashboardController::main
+
+transactions_list:
+  path: /produse
+  controller: \Pos\Controller\TransactionController::list
 
 print_months:
   path: /print
-  controller: \Pos\Controller\PosController::printMonths
+  controller: \Pos\Controller\TransactionController::printMonths
 
 order_new:
   path: /order/new
@@ -22,7 +26,7 @@ order_delete:
 
 transaction_drives:
   path: /drives
-  controller: \Pos\Controller\PosController::showDrives
+  controller: \Pos\Controller\TransactionController::showDrives
 
 sale_new:
   path: /sale/new
@@ -37,3 +41,122 @@ sale_delete:
   controller: \Pos\Controller\SaleController::delete
   requirements:
     sale: '\d+'
+
+register:
+  path: /register
+  controller: \Pos\Controller\DashboardController::register
+
+register_debtnote_list:
+  path: /register/debtnotes
+  controller: \Pos\Controller\Register\DebtNoteController::list
+register_debtnote_new:
+  path: /register/debtnotes/new
+  controller: \Pos\Controller\Register\DebtNoteController::new
+register_debtnote_show:
+  path: /register/debtnotes/{note}
+  controller: \Pos\Controller\Register\DebtNoteController::show
+  requirements:
+    note: '\d+'
+register_debtnote_delete:
+  path: /register/debtnotes/{note}/delete
+  controller: \Pos\Controller\Register\DebtNoteController::delete
+  requirements:
+    note: '\d+'
+register_debtnote_addproduct:
+  path: /register/debtnotes/{note}/add/{product}
+  controller: \Pos\Controller\Register\DebtNoteController::addProduct
+  requirements:
+    note: '\d+'
+    product: '\d+'
+register_debtnote_removeproduct:
+  path: /register/debtnotes/{note}/remove/{product}
+  controller: \Pos\Controller\Register\DebtNoteController::removeProduct
+  requirements:
+    note: '\d+'
+    product: '\d+'
+register_debtnote_close:
+  path: /register/debtnotes/{note}/close
+  controller: \Pos\Controller\Register\DebtNoteController::close
+  requirements:
+    note: '\d+'
+
+register_sale_new:
+  path: /register/new
+  controller: \Pos\Controller\Register\SaleController::new
+register_sale_show:
+  path: /register/{sale}
+  controller: \Pos\Controller\Register\SaleController::show
+register_sale_back:
+  path: /register/{sale}/back
+  controller: \Pos\Controller\Register\SaleController::back
+register_sale_addproduct:
+  path: /register/sale/{sale}/add/{product}
+  controller: \Pos\Controller\Register\SaleController::addProduct
+  requirements:
+    sale: '\d+'
+    product: '\d+'
+register_sale_removeproduct:
+  path: /register/sale/{sale}/remove/{product}
+  controller: \Pos\Controller\Register\SaleController::removeProduct
+  requirements:
+    sale: '\d+'
+    product: '\d+'
+register_sale_close:
+  path: /register/sale/{sale}/close
+  controller: \Pos\Controller\Register\SaleController::close
+  requirements:
+    sale: '\d+'
+
+management:
+  path: /management
+  controller: \Pos\Controller\DashboardController::management
+management_product_list:
+  path: /management/products
+  controller: \Pos\Controller\Management\ProductController::list
+management_product_new:
+  path: /management/products/new
+  controller: \Pos\Controller\Management\ProductController::new
+management_product_edit:
+  path: /management/products/{product}
+  controller: \Pos\Controller\Management\ProductController::edit
+  requirements:
+    product: '\d+'
+management_product_delete:
+  path: /management/products/{product}/delete
+  controller: \Pos\Controller\Management\ProductController::delete
+  requirements:
+    order: '\d+'
+
+management_product_category_list:
+  path: /management/product/categories
+  controller: \Pos\Controller\Management\CategoryController::list
+management_product_category_new:
+  path: /management/product/categories/new
+  controller: \Pos\Controller\Management\CategoryController::new
+management_product_category_edit:
+  path: /management/product/categories/{category}
+  controller: \Pos\Controller\Management\CategoryController::edit
+  requirements:
+    category: '\d+'
+management_product_category_delete:
+  path: /management/product/categories/{category}/delete
+  controller: \Pos\Controller\Management\CategoryController::delete
+  requirements:
+    category: '\d+'
+
+management_client_list:
+  path: /management/client
+  controller: \Pos\Controller\Management\ClientController::list
+management_client_new:
+  path: /management/client/new
+  controller: \Pos\Controller\Management\ClientController::new
+management_client_edit:
+  path: /management/client/{client}
+  controller: \Pos\Controller\Management\ClientController::edit
+  requirements:
+    client: '\d+'
+management_client_delete:
+  path: /management/client/{client}/delete
+  controller: \Pos\Controller\Management\ClientController::delete
+  requirements:
+    client: '\d+'

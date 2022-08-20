@@ -1,0 +1,21 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div class="ui grid">
+        <div class="row">
+            <div class="column">
+                <h2>Verwaltung</h2>
+            </div>
+        </div>
+        <div class="two column row">
+            <div class="column">
+                <a class="ui button fluid massive" href="{{ path('management_product_list') }}">Produkte</a>
+            </div>
+            <div class="column">
+                <a class="ui button fluid massive" href="{{ path('management_client_list') }}">Kunden</a>
+            </div>
+        </div>
+    </div>
+
+    {% include 'includes/print/backButton.html.twig' with {'url': path('dashboard')} %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div class="ui grid">
+        <div class="row">
+            <div class="column">
+                <h2>Dashboard</h2>
+            </div>
+        </div>
+        <div class="three column row">
+            <div class="column">
+                <a class="ui button fluid massive" href="{{ path('register') }}">Kasse</a>
+            </div>
+            <div class="column">
+                <a class="ui button fluid massive" href="{{ path('management') }}">Verwaltung</a>
+            </div>
+            <div class="column">
+                <a class="ui button fluid massive" href="{{ path('transactions_list') }}">Transaktionen</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
