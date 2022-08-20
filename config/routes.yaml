@@ -75,6 +75,12 @@ register_debtnote_removeproduct:
     note: '\d+'
     product: '\d+'
 
+register_debtnote_close:
+  path: /register/debtnotes/{note}/close
+  controller: \Pos\Controller\Register\DebtNoteController::close
+  requirements:
+    note: '\d+'
+
 management:
   path: /management
   controller: \Pos\Controller\DashboardController::management

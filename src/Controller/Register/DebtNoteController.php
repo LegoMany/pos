@@ -3,6 +3,7 @@
 namespace Pos\Controller\Register;
 
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use Pos\Domain\Register;
 use Pos\Entity\DebtNote;
 use Pos\Entity\Item;
 use Pos\Entity\Product;
@@ -85,6 +86,12 @@ class DebtNoteController extends AbstractController
         return $this->redirectToRoute('register_debtnote_show', [
             'note' => $note->id,
         ]);
+    }
+
+    public function close(DebtNote $note, Register $register): Response
+    {
+        $register->closeDebtNote($note);
+        return $this->redirectToRoute('register_debtnote_list');
     }
 
     public function delete(DebtNote $note): Response

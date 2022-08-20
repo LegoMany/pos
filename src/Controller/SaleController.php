@@ -29,19 +29,12 @@ class SaleController extends AbstractController
             $entityManager->persist($sale);
             $entityManager->flush();
 
-            return $this->redirectToRoute('pos_index');
+            return $this->redirectToRoute('transactions_list');
         }
 
         return $this->render('sale/new.html.twig', [
             'sale' => $sale,
             'form' => $form->createView(),
-        ]);
-    }
-
-    public function show(Transaction $sale): Response
-    {
-        return $this->render('sale/show.html.twig', [
-            'sale' => $sale,
         ]);
     }
 
@@ -53,7 +46,7 @@ class SaleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('pos_index');
+            return $this->redirectToRoute('transactions_list');
         }
 
         return $this->render('sale/edit.html.twig', [
@@ -68,6 +61,6 @@ class SaleController extends AbstractController
         $entityManager->remove($sale);
         $entityManager->flush();
 
-        return $this->redirectToRoute('pos_index');
+        return $this->redirectToRoute('transactions_list');
     }
 }

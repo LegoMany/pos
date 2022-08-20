@@ -2,10 +2,9 @@
 
 namespace Pos\Controller;
 
-use DateTime;
+use Pos\Domain\Printer\Printer;
 use Pos\Entity\Transaction;
 use Pos\Form\PrintType;
-use Pos\Printer\Printer;
 use Pos\Repository\TransactionRepository;
 use Pos\Utility\ArrayUtility;
 use Pos\Utility\NumberUtility;

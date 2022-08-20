@@ -52,6 +52,9 @@ class Transaction
      */
     public ?float $price = 0;
 
+    /**
+     * Used internally when creating the print view
+     */
     public ?int $receiptNumber = null;
 
     public function __construct()
