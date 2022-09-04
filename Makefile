@@ -62,6 +62,11 @@ add-hosts-entry:
 	SERVICES=$$(command -v getent > /dev/null && echo "getent ahostsv4" || echo "dscacheutil -q host -a name"); \
 	if [ ! "$$($$SERVICES $(HOST) | grep 127.0.0.1 > /dev/null; echo $$?)" -eq 0 ]; then sudo bash -c 'echo "127.0.0.1 $(HOST)" >> /etc/hosts; echo "Entry was added"'; else echo 'Entry already exists'; fi;
 
+
+## Create the hosts entry for the custom project URL (non-dinghy convention)
+deploy:
+	git push ssh://loghin/home/sloghin/www/uca/source master
+
 ## Log into the PHP container
 login-php:
 	echo "$(EMOJI_elephant) Logging into the PHP container"
@@ -76,6 +81,11 @@ login-mysql:
 login-httpd:
 	echo "$(EMOJI_helicopter) Logging into HTTPD Container"
 	docker-compose exec httpd bash
+
+## Log into the node container
+login-node:
+	echo "$(EMOJI_package) Logging in into Node container"
+	docker-compose exec -unode node bash
 
 include .env
 
