@@ -19,7 +19,8 @@
     "symfony/proxy-manager-bridge": "^5.4",
     "doctrine/doctrine-bundle": "^2.7",
     "doctrine/doctrine-migrations-bundle": "^3.2",
-    "doctrine/orm": "^2.13"
+    "doctrine/orm": "^2.13",
+    "stof/doctrine-extensions-bundle": "^1.7"
   },
   "require-dev": {
     "symfony/monolog-bundle": "*",
