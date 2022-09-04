@@ -19,7 +19,7 @@ services:
   php:
     image: in2code/php-dev:7.4-fpm
     volumes:
-      - ./symfony:/app/:cached
+      - ./:/app/:cached
       - $HOME/.composer/auth.json:/tmp/composer/auth.json
       - $HOME/.composer/cache/:/tmp/composer/cache/
     working_dir: /app/symfony

@@ -3,7 +3,7 @@
 namespace Pos\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Pos\Entity\Item;
 
 class ItemRepository extends ServiceEntityRepository

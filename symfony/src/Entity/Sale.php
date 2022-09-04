@@ -25,7 +25,7 @@ class Sale
     public ?Client $client;
 
     /**
-     * @ORM\OneToMany(targetEntity=Item::class, mappedBy="sale", cascade="persist")
+     * @ORM\OneToMany(targetEntity=Item::class, mappedBy="sale", cascade={"persist"})
      */
     public ?Collection $items;
 
