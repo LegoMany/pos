@@ -16,10 +16,10 @@
     "symfony/twig-bundle": "*",
     "twig/extra-bundle": "*",
     "twig/twig": "*",
+    "symfony/proxy-manager-bridge": "^5.4",
     "doctrine/doctrine-bundle": "^2.7",
     "doctrine/doctrine-migrations-bundle": "^3.2",
-    "doctrine/orm": "^2.13",
-    "symfony/proxy-manager-bridge": "^5.4"
+    "doctrine/orm": "^2.13"
   },
   "require-dev": {
     "symfony/monolog-bundle": "*",
