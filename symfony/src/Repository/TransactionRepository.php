@@ -44,8 +44,8 @@ class TransactionRepository extends ServiceEntityRepository
 
         try {
             $stmt = $connection->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll();
+            $result = $stmt->executeQuery();
+            return $result->fetchAllAssociative();
         } catch (Throwable $e) {
             return [];
         }
