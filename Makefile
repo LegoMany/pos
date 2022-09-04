@@ -15,10 +15,17 @@ start:
 	echo "$(EMOJI_up) Starting the docker project"
 	docker-compose up -d --build
 
+## Creates a backup of the database
+mysql-dump:
+	echo "$(EMOJI_floppy_disk) Dumping the database"
+	mkdir -p .data/dumps
+	docker-compose exec -u 1000:1000 mysql bash -c "mysqldump -uroot -proot --add-drop-database --create-options --extended-insert --no-autocommit --quick --default-character-set=utf8 $(MYSQL_DATABASE) | gzip > /.data/dumps/db.sql.gz"
+
+
 ## Starts composer-install
 composer-install:
 	echo "$(EMOJI_package) Installing composer dependencies"
-	docker-compose exec php composer1 install
+	docker-compose exec php composer install
 
 ## Install mkcert on this computer, skips installation if already present
 install-mkcert:

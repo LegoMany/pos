@@ -4,10 +4,11 @@ services:
   httpd:
     image: in2code/httpd:2.4-alpine
     environment:
-      WEB_DOCUMENT_ROOT: /app/${WEBROOT}/
+      WEB_DOCUMENT_ROOT: /app/symfony/${WEBROOT}/
       VIRTUAL_HOST: ${HOST}
       VIRTUAL_PORT: 443
       VIRTUAL_PROTO: https
+    working_dir: /app/symfony
     volumes:
       - ./:/app/:cached
     networks:
@@ -18,9 +19,10 @@ services:
   php:
     image: in2code/php-dev:7.4-fpm
     volumes:
-      - ./:/app/:cached
+      - ./symfony:/app/:cached
       - $HOME/.composer/auth.json:/tmp/composer/auth.json
       - $HOME/.composer/cache/:/tmp/composer/cache/
+    working_dir: /app/symfony
     env_file:
       - .env
 

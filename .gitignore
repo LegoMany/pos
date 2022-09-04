@@ -1,12 +1,11 @@
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.prod
-/config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
-/var/
-/vendor/
+/symfony/config/secrets/prod/prod.decrypt.private.php
+/symfony/public/bundles/
+/symfony/var/
+/symfony/vendor/
 ###< symfony/framework-bundle ###
 
-/build/node_modules
 /.idea/
 .data
