@@ -22,28 +22,29 @@ class Register
 
     public function closeSale(Sale $note): void
     {
-        $todaysDate = new DateTime();
+        if ($note->getTotal() > 0) {
+            $todaysDate = new DateTime();
 
-        $existingTransaction = $this->transactionRepository->findOneBy([
-            'date' => $todaysDate,
-            'type' => Transaction::TYPE_SALE,
-        ]);
+            $existingTransaction = $this->transactionRepository->findOneBy([
+                'date' => $todaysDate,
+                'type' => Transaction::TYPE_SALE,
+            ]);
 
-        if ($existingTransaction instanceof Transaction) {
-            $existingTransaction->price += $note->getTotal();
-            $this->em->flush();
-        } else {
-            $newTransaction = new Transaction();
-            $newTransaction->type = Transaction::TYPE_SALE;
-            $newTransaction->item = 'Kasiert';
-            $newTransaction->price = $note->getTotal();
-            $newTransaction->date = $todaysDate;
-            $this->em->persist($newTransaction);
+            if ($existingTransaction instanceof Transaction) {
+                $existingTransaction->price += $note->getTotal();
+                $this->em->flush();
+            } else {
+                $newTransaction = new Transaction();
+                $newTransaction->type = Transaction::TYPE_SALE;
+                $newTransaction->item = 'Kasiert';
+                $newTransaction->price = $note->getTotal();
+                $newTransaction->date = $todaysDate;
+                $this->em->persist($newTransaction);
+            }
+
+            $note->client = null;
         }
 
-        foreach ($note->items as $item) {
-            $this->em->remove($item);
-        }
         $this->em->remove($note);
         $this->em->flush();
     }

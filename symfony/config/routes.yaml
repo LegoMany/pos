@@ -68,12 +68,12 @@ register_debtnote_addproduct:
   requirements:
     note: '\d+'
     product: '\d+'
-register_debtnote_removeproduct:
-  path: /register/debtnotes/{note}/remove/{product}
-  controller: \Pos\Controller\Register\DebtNoteController::removeProduct
+register_debtnote_removeitem:
+  path: /register/debtnotes/{note}/remove/{item}
+  controller: \Pos\Controller\Register\DebtNoteController::removeItem
   requirements:
     note: '\d+'
-    product: '\d+'
+    item: '\d+'
 register_debtnote_close:
   path: /register/debtnotes/{note}/close
   controller: \Pos\Controller\Register\DebtNoteController::close
@@ -95,12 +95,12 @@ register_sale_addproduct:
   requirements:
     sale: '\d+'
     product: '\d+'
-register_sale_removeproduct:
-  path: /register/sale/{sale}/remove/{product}
-  controller: \Pos\Controller\Register\SaleController::removeProduct
+register_sale_removeitem:
+  path: /register/sale/{sale}/remove/{item}
+  controller: \Pos\Controller\Register\SaleController::removeItem
   requirements:
     sale: '\d+'
-    product: '\d+'
+    item: '\d+'
 register_sale_close:
   path: /register/sale/{sale}/close
   controller: \Pos\Controller\Register\SaleController::close

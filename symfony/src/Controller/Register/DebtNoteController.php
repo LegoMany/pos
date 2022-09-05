@@ -2,13 +2,13 @@
 
 namespace Pos\Controller\Register;
 
-use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Pos\Domain\Register;
-use Pos\Entity\Sale;
 use Pos\Entity\Item;
 use Pos\Entity\Product;
+use Pos\Entity\Sale;
 use Pos\Form\DebtNoteType;
 use Pos\Repository\CategoryRepository;
+use Pos\Repository\ItemRepository;
 use Pos\Repository\SaleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,18 +71,10 @@ class DebtNoteController extends AbstractController
         ]);
     }
 
-    public function removeProduct(Sale $note, Product $product): Response
+    public function removeItem(Sale $note, Item $item, ItemRepository $itemRepository): Response
     {
-        $item = $note->items->filter(function (Item $item) use ($product) {
-            return $item->product->id === $product->id;
-        })->first();
+        $itemRepository->delete($item);
 
-        $note->removeProduct($product);
-
-
-        $this->getDoctrine()->getManager()->remove($item);
-        $this->getDoctrine()->getManager()->persist($note);
-        $this->getDoctrine()->getManager()->flush();
         return $this->redirectToRoute('register_debtnote_show', [
             'note' => $note->id,
         ]);
@@ -96,13 +88,15 @@ class DebtNoteController extends AbstractController
 
     public function delete(Sale $note): Response
     {
-        try {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($note);
-            $entityManager->flush();
-        } catch (ForeignKeyConstraintViolationException $exception) {
+        if ($note->items->count() > 0) {
             $this->addFlash('error', 'Kann nicht gelöscht werden, da es noch Artikel zu dieser Notiz gibt.');
+            return $this->redirectToRoute('register_debtnote_list');
         }
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $note->client = null;
+        $entityManager->remove($note);
+        $entityManager->flush();
 
         return $this->redirectToRoute('register_debtnote_list');
     }
