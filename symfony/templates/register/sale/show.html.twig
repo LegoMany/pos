@@ -1,0 +1,91 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div class="ui container">
+        <div class="column">
+            <h2>Verkauf</h2>
+        </div>
+    </div>
+
+    <div class="ui container">
+        <div class="ui grid">
+            <div class="column ten wide">
+                {% for category in categories %}
+                    <h3>{{ category.name }}</h3>
+                    <div class="ui grid">
+                        {% for product in category.products %}
+                            <div class="four wide column">
+                                <a class="ui button green fluid"
+                                   href="{{ path('register_sale_addproduct', {'sale': sale.id, 'product': product.id}) }}">
+                                    {{ product.name }}
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="column six wide">
+                <table class="ui compact celled definition table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Artikel</th>
+                        <th>Anzahl</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if sale.items is not empty %}
+                        {% for item in sale.items %}
+                            <tr>
+                                <td>
+                                    <a class="ui button wide fluid"
+                                       href="{{ path('register_debtnote_removeitem', {'note': sale.id, 'item': item.id}) }}">
+                                        <i class="trash icon red"></i>
+                                    </a>
+                                </td>
+                                <td>{{ item.product.name }}</td>
+                                <td>{{ item.quantity }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="3">Keine Artikeln</td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th></th>
+                        <th class="bold">Summe</th>
+                        <th class="bold">{{ sale.total | format(2) }} €</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="ui container">
+        <div class="ui small test modal transition" data-modal="closesale">
+            <div class="header">
+                Sicher?
+            </div>
+            <div class="actions">
+                <a class="ui negative button massive">
+                    Nein
+                </a>
+                <a class="ui positive labeled icon button massive"
+                   href="{{ path('register_sale_close', {'sale': sale.id}) }}">
+                    Ja
+                    <i class="checkmark icon"></i>
+                </a>
+            </div>
+        </div>
+        <button class="ui button red fluid massive" data-modal="closesale">
+            Abschließen
+        </button>
+    </div>
+
+    {% include 'includes/print/backButton.html.twig' with {'url': path('register_sale_back', {'sale': sale.id}) } %}
+{% endblock %}
