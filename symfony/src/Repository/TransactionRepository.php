@@ -67,36 +67,6 @@ class TransactionRepository extends ServiceEntityRepository
             ->execute();
     }
 
-    public function getPreviousTransaction(Transaction $transaction): ?Transaction
-    {
-        $fromDate = new DateTime();
-        $fromDate->setDate(
-            $transaction->date->format('Y'),
-            1,
-            1
-        );
-        $toDate = new DateTime();
-        $toDate->setDate(
-            $transaction->date->format('Y'),
-            12,
-            31
-        );
-
-        $row = $this->createQueryBuilder('t')
-            ->where('t.date BETWEEN :from AND :to')
-            ->setParameter('from', $fromDate, Types::DATE_MUTABLE)
-            ->setParameter('to', $toDate, Types::DATE_MUTABLE)
-            ->orderBy('t.receiptNumber', 'DESC')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->execute();
-
-        if (false === empty($row)) {
-            return $row[0];
-        }
-        return null;
-    }
-
     public function getGroupedByItemWithCount(int $year): array
     {
         $connection = $this->getEntityManager()->getConnection();
@@ -108,8 +78,8 @@ class TransactionRepository extends ServiceEntityRepository
 
         try {
             $stmt = $connection->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll();
+            $result = $stmt->executeQuery();
+            return $result->fetchAllAssociative();
         } catch (Throwable $e) {
             return [];
         }
@@ -125,8 +95,8 @@ class TransactionRepository extends ServiceEntityRepository
 
         try {
             $stmt = $connection->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll(FetchMode::COLUMN);
+            $result = $stmt->executeQuery();
+            return $result->fetchFirstColumn();
         } catch (Throwable $e) {
             return [];
         }
