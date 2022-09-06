@@ -1,5 +1,11 @@
 {% extends 'layout.html.twig' %}
 
+{% block header %}
+    <a href="{{ path('home') }}" class="item">
+        POS
+    </a>
+{% endblock %}
+
 {% block actions %}
     <div class="item">
         <a href="{{ path('register_sale_new') }}"
