@@ -38,6 +38,9 @@ class ProductType extends AbstractType
                     'required' => true,
                     'class' => Category::class,
                     'choice_label' => 'name',
+                    'attr' => [
+                        'class' => 'ui dropdown search',
+                    ],
                 ]
 
             );;
