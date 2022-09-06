@@ -31,7 +31,7 @@ class Register
             ]);
 
             if ($existingTransaction instanceof Transaction) {
-                $existingTransaction->price += $note->getTotal();
+                $existingTransaction->price = round($existingTransaction->price + $note->getTotal(), 2);
                 $this->em->flush();
             } else {
                 $newTransaction = new Transaction();

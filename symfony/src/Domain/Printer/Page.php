@@ -26,9 +26,9 @@ class Page
     public function addTransaction(Transaction $transaction): self
     {
         if ($transaction->type === Transaction::TYPE_ORDER) {
-            $this->ordersSum += $transaction->price;
+            $this->ordersSum = round($this->ordersSum + $transaction->price, 2);
         } elseif ($transaction->type === Transaction::TYPE_SALE) {
-            $this->salesSum += $transaction->price;
+            $this->salesSum =round( $this->salesSum + $transaction->price, 2);
         }
         $this->rows->add($transaction);
         return $this;
@@ -41,7 +41,7 @@ class Page
 
     public function fillRows(int $maxRowsAllowed)
     {
-        $rowsToAdd = $maxRowsAllowed - $rowsCount = $this->rows->count();
+        $rowsToAdd = $maxRowsAllowed - $this->rows->count();
         for ($i = 1; $i <= $rowsToAdd; $i++) {
             $this->rows->add([]);
         }
