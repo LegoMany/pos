@@ -1,7 +1,3 @@
-home:
-  path: /
-  controller: \Pos\Controller\HomeController::main
-
 transactions_list:
   path: /produse
   controller: \Pos\Controller\TransactionController::list
@@ -102,57 +98,3 @@ register_sale_close:
   controller: \Pos\Controller\Register\SaleController::close
   requirements:
     sale: '\d+'
-
-management:
-  path: /management
-  controller: \Pos\Controller\HomeController::management
-management_product_list:
-  path: /management/products
-  controller: \Pos\Controller\Management\ProductController::list
-management_product_new:
-  path: /management/products/new
-  controller: \Pos\Controller\Management\ProductController::new
-management_product_edit:
-  path: /management/products/{product}
-  controller: \Pos\Controller\Management\ProductController::edit
-  requirements:
-    product: '\d+'
-management_product_delete:
-  path: /management/products/{product}/delete
-  controller: \Pos\Controller\Management\ProductController::delete
-  requirements:
-    order: '\d+'
-
-management_product_category_list:
-  path: /management/product/categories
-  controller: \Pos\Controller\Management\CategoryController::list
-management_product_category_new:
-  path: /management/product/categories/new
-  controller: \Pos\Controller\Management\CategoryController::new
-management_product_category_edit:
-  path: /management/product/categories/{category}
-  controller: \Pos\Controller\Management\CategoryController::edit
-  requirements:
-    category: '\d+'
-management_product_category_delete:
-  path: /management/product/categories/{category}/delete
-  controller: \Pos\Controller\Management\CategoryController::delete
-  requirements:
-    category: '\d+'
-
-management_client_list:
-  path: /management/client
-  controller: \Pos\Controller\Management\ClientController::list
-management_client_new:
-  path: /management/client/new
-  controller: \Pos\Controller\Management\ClientController::new
-management_client_edit:
-  path: /management/client/{client}
-  controller: \Pos\Controller\Management\ClientController::edit
-  requirements:
-    client: '\d+'
-management_client_delete:
-  path: /management/client/{client}/delete
-  controller: \Pos\Controller\Management\ClientController::delete
-  requirements:
-    client: '\d+'

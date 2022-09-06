@@ -9,7 +9,11 @@ use Pos\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route(name="management_category_", path="/management/categories")
+ */
 class CategoryController extends AbstractController
 {
     protected CategoryRepository $categoryRepository;
@@ -21,6 +25,9 @@ class CategoryController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @Route(name="list", path="")
+     */
     public function list(): Response
     {
         return $this->render('management/category/list.html.twig', [
@@ -28,6 +35,9 @@ class CategoryController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route(name="new", path="/new")
+     */
     public function new(Request $request): Response
     {
         $category = new Category();
@@ -38,7 +48,7 @@ class CategoryController extends AbstractController
             $this->entityManager->persist($category);
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('management_product_category_list');
+            return $this->redirectToRoute('management_category_list');
         }
 
         return $this->render('management/category/new.html.twig', [
@@ -47,6 +57,9 @@ class CategoryController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route(name="edit", path="/{category}", requirements={"category"="\d+"})
+     */
     public function edit(Request $request, Category $category): Response
     {
         $form = $this->createForm(CategoryType::class, $category);
@@ -55,7 +68,7 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('management_product_category_list');
+            return $this->redirectToRoute('management_category_list');
         }
 
         return $this->render('management/category/edit.html.twig', [
@@ -64,11 +77,14 @@ class CategoryController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route(name="delete", path="/{category}/delete", requirements={"category"="\d+"})
+     */
     public function delete(Category $category): Response
     {
         $this->entityManager->remove($category);
         $this->entityManager->flush();
 
-        return $this->redirectToRoute('management_product_category_list');
+        return $this->redirectToRoute('management_category_list');
     }
 }

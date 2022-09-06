@@ -15,7 +15,7 @@
 
 {% block actions %}
     <div class="item">
-        <a href="{{ path('management_product_category_new') }}"
+        <a href="{{ path('management_category_new') }}"
            class="ui button green fluid massive">
             Neu
         </a>
@@ -30,14 +30,14 @@
                     <div class="ui cards">
                         <div class="card">
                             <div class="content bold bigtext center aligned">
-                                <a class="ui button big blue fluid" href="{{ path('management_product_category_edit', {'category': category.id}) }}">
+                                <a class="ui button big blue fluid" href="{{ path('management_category_edit', {'category': category.id}) }}">
                                     {{ category.name }}
                                 </a>
                             </div>
                             <div class="extra content">
                                 <div class="ui two buttons">
                                     <a class="ui red button big icon"
-                                       href="{{ path('management_product_category_delete', {'category': category.id}) }}">
+                                       href="{{ path('management_category_delete', {'category': category.id}) }}">
                                         <i class="trash icon white"></i>
                                     </a>
                                 </div>

@@ -9,7 +9,11 @@ use Pos\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route(name="management_product_", path="/management/products")
+ */
 class ProductController extends AbstractController
 {
     private CategoryRepository $categoryRepository;
@@ -23,6 +27,9 @@ class ProductController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @Route(name="list", path="")
+     */
     public function list(): Response
     {
         return $this->render('management/product/list.html.twig', [
@@ -30,6 +37,9 @@ class ProductController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route(name="new", path="/new")
+     */
     public function new(Request $request): Response
     {
         $product = new Product();
@@ -49,6 +59,9 @@ class ProductController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route(name="edit", path="/{product}", requirements={"product"="\d+"})
+     */
     public function edit(Request $request, Product $product): Response
     {
         $form = $this->createForm(ProductType::class, $product);
@@ -66,6 +79,9 @@ class ProductController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route(name="delete", path="/{product}/delete", requirements={"product"="\d+"})
+     */
     public function delete(Product $product): Response
     {
         $this->entityManager->remove($product);
