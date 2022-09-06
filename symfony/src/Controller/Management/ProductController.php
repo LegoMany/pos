@@ -2,23 +2,25 @@
 
 namespace Pos\Controller\Management;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Pos\Entity\Product;
 use Pos\Form\ProductType;
 use Pos\Repository\CategoryRepository;
-use Pos\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends AbstractController
 {
-    private ProductRepository $productRepository;
     private CategoryRepository $categoryRepository;
+    private EntityManagerInterface $entityManager;
 
-    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository)
-    {
-        $this->productRepository = $productRepository;
+    public function __construct(
+        CategoryRepository $categoryRepository,
+        EntityManagerInterface $entityManager
+    ) {
         $this->categoryRepository = $categoryRepository;
+        $this->entityManager = $entityManager;
     }
 
     public function list(): Response
@@ -35,9 +37,8 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($product);
-            $entityManager->flush();
+            $this->entityManager->persist($product);
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('management_product_list');
         }
@@ -54,7 +55,7 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('management_product_list');
         }
@@ -67,9 +68,8 @@ class ProductController extends AbstractController
 
     public function delete(Product $product): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($product);
-        $entityManager->flush();
+        $this->entityManager->remove($product);
+        $this->entityManager->flush();
 
         return $this->redirectToRoute('management_product_list');
     }

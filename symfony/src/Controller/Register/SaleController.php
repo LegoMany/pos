@@ -2,6 +2,7 @@
 
 namespace Pos\Controller\Register;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Pos\Domain\Register;
 use Pos\Entity\Item;
 use Pos\Entity\Product;
@@ -15,17 +16,19 @@ use Symfony\Component\HttpFoundation\Response;
 class SaleController extends AbstractController
 {
     private CategoryRepository $categoryRepository;
+    private EntityManagerInterface $entityManager;
 
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(CategoryRepository $categoryRepository, EntityManagerInterface $entityManager)
     {
         $this->categoryRepository = $categoryRepository;
+        $this->entityManager = $entityManager;
     }
 
     public function new(): Response
     {
         $sale = new Sale();
-        $this->getDoctrine()->getManager()->persist($sale);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->persist($sale);
+        $this->entityManager->flush();
 
         return $this->redirectToRoute('register_sale_show', [
             'sale' => $sale->id,
@@ -43,7 +46,7 @@ class SaleController extends AbstractController
     public function addProduct(Sale $sale, Product $product): Response
     {
         $sale->addProduct($product);
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->flush();
         return $this->redirectToRoute('register_sale_show', [
             'sale' => $sale->id,
         ]);

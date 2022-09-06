@@ -3,6 +3,7 @@
 namespace Pos\Controller\Management;
 
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use Doctrine\ORM\EntityManagerInterface;
 use Pos\Entity\Client;
 use Pos\Form\ClientType;
 use Pos\Repository\ClientRepository;
@@ -13,10 +14,12 @@ use Symfony\Component\HttpFoundation\Response;
 class ClientController extends AbstractController
 {
     private ClientRepository $clientRepository;
+    private EntityManagerInterface $entityManager;
 
-    public function __construct(ClientRepository $clientRepository)
+    public function __construct(ClientRepository $clientRepository, EntityManagerInterface $entityManager)
     {
         $this->clientRepository = $clientRepository;
+        $this->entityManager = $entityManager;
     }
 
     public function list(): Response
@@ -33,9 +36,8 @@ class ClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($client);
-            $entityManager->flush();
+            $this->entityManager->persist($client);
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('management_client_list');
         }
@@ -52,7 +54,7 @@ class ClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('management_client_list');
         }
@@ -66,9 +68,8 @@ class ClientController extends AbstractController
     public function delete(Client $client): Response
     {
         try {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($client);
-            $entityManager->flush();
+            $this->entityManager->remove($client);
+            $this->entityManager->flush();
         } catch (ForeignKeyConstraintViolationException $exception) {
             $this->addFlash('error', 'Kann nicht gelöscht werden, da es noch Einträge zu diesem Kunden gibt.');
         }

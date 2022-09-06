@@ -2,6 +2,7 @@
 
 namespace Pos\Controller\Management;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Pos\Entity\Category;
 use Pos\Form\CategoryType;
 use Pos\Repository\CategoryRepository;
@@ -12,10 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
 class CategoryController extends AbstractController
 {
     protected CategoryRepository $categoryRepository;
+    private EntityManagerInterface $entityManager;
 
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(CategoryRepository $categoryRepository, EntityManagerInterface $entityManager)
     {
         $this->categoryRepository = $categoryRepository;
+        $this->entityManager = $entityManager;
     }
 
     public function list(): Response
@@ -32,9 +35,8 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($category);
-            $entityManager->flush();
+            $this->entityManager->persist($category);
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('management_product_category_list');
         }
@@ -51,7 +53,7 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('management_product_category_list');
         }
@@ -64,9 +66,8 @@ class CategoryController extends AbstractController
 
     public function delete(Category $category): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($category);
-        $entityManager->flush();
+        $this->entityManager->remove($category);
+        $this->entityManager->flush();
 
         return $this->redirectToRoute('management_product_category_list');
     }
