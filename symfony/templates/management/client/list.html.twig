@@ -1,34 +1,39 @@
 {% extends 'layout.html.twig' %}
 
-{% block body %}
-    <div class="ui grid">
-        <div class="row">
-            <div class="column">
-                <h2>Kunden</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="column sixteen wide">
-                <a class="ui button fluid massive green" href="{{ path('management_client_new') }}">Neu</a>
-            </div>
-        </div>
-    </div>
+{% block header %}
+    <a href="{{ path('management') }}" class="item">
+        Verwaltung
+    </a>
+    <a href="#" class="item active">
+        Kunden
+    </a>
+{% endblock %}
 
-    <div class="doubling stackable four column ui grid container">
+{% block actions %}
+    <div class="item">
+        <a href="{{ path('management_client_new') }}"
+           class="ui button green fluid massive">
+            Neu
+        </a>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="ui grid container">
         {% if clients %}
             {% for client in clients %}
-                <div class="column">
+                <div class="four wide column">
                     <div class="ui cards">
                         <div class="card">
                             <div class="content bold bigtext center aligned">
-                                {{ client.name }}
+                                <a class="ui button big blue fluid" href="{{ path('management_client_edit', {'client': client.id}) }}">
+                                    {{ client.name }}
+                                </a>
                             </div>
                             <div class="extra content">
                                 <div class="ui two buttons">
-                                    <a class="ui blue button massive icon" href="{{ path('management_client_edit', {'client': client.id}) }}">
-                                        <i class="edit icon white"></i>
-                                    </a>
-                                    <a class="ui red button massive icon" href="{{ path('management_client_delete', {'client': client.id}) }}">
+                                    <a class="ui red button big icon"
+                                       href="{{ path('management_client_delete', {'client': client.id}) }}">
                                         <i class="trash icon white"></i>
                                     </a>
                                 </div>
@@ -37,10 +42,10 @@
                     </div>
                 </div>
             {% endfor %}
-            {% else %}
-            <h2>Keine Kunden vorhanden</h2>
+        {% else %}
+            <div class="ui container">
+                <span class="ui horizontal section divider">Keine Kunden vorhanden</span>
+            </div>
         {% endif %}
     </div>
-
-    {% include 'includes/print/backButton.html.twig' with {'url': path('management')} %}
 {% endblock %}
