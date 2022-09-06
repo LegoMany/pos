@@ -9,3 +9,7 @@
 .attached .ui.menu {
     border: 0;
 }
+
+.ui.horizontal.section.divider.big {
+    font-size: 1.5rem;
+}

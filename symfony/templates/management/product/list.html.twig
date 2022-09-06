@@ -25,7 +25,7 @@
 {% block body %}
     {% if categories %}
         {% for category in categories %}
-            <span class="ui horizontal section divider">{{ category.name }}</span>
+            <span class="ui horizontal section divider big">{{ category.name }}</span>
             {% if category.products is not empty %}
                 <div class="ui grid">
                     {% for product in category.products %}
