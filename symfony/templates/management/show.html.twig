@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block header %}
-    <a href="{{ path('management') }}" class="item active">
+    <a href="#" class="item active">
         Verwaltung
     </a>
 {% endblock %}
@@ -9,15 +9,15 @@
 {% block actions %}
     <div class="ui three item menu">
         <a href="{{ path('management_product_category_list') }}"
-           class="ui big fluid button blue">
+           class="ui massive fluid button blue">
             Kategorien
         </a>
         <a href="{{ path('management_product_list') }}"
-           class="ui big fluid button green">
+           class="ui massive fluid button green">
             Produkte
         </a>
         <a href="{{ path('management_client_list') }}"
-           class="ui big fluid button yellow">
+           class="ui massive fluid button yellow">
             Kunden
         </a>
     </div>

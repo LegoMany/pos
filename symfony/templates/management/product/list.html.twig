@@ -1,54 +1,60 @@
 {% extends 'layout.html.twig' %}
 
-{% block body %}
-    <div class="ui grid">
-        <div class="row">
-            <div class="column">
-                <h2>Produkte</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="column sixteen wide">
-                <a class="ui button fluid massive green" href="{{ path('management_product_new') }}">Neu</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="column sixteen wide">
-                <a class="ui button fluid massive" href="{{ path('management_product_category_list') }}">Kategorien</a>
-            </div>
-        </div>
+{% block header %}
+    <a href="{{ path('management') }}" class="item">
+        Verwaltung
+    </a>
+    <a href="#" class="item active">
+        Produkte
+    </a>
+{% endblock %}
+
+{% block actions %}
+    <div class="item">
+        <a href="{{ path('management_product_new') }}"
+           class="ui button green fluid massive">
+            Neu
+        </a>
     </div>
+{% endblock %}
+
+{% block body %}
 
     {% if categories %}
         {% for category in categories %}
-            <h2>{{ category.name }}</h2>
-            <div class="doubling stackable four column ui grid container">
-                {% for product in category.products %}
-                    <div class="column">
-                        <div class="ui cards">
-                            <div class="card">
-                                <div class="content bold bigtext center aligned">
-                                    {{ product.name }}
-                                </div>
-                                <div class="extra content">
-                                    <div class="ui two buttons">
-                                        <a class="ui blue button massive icon" href="{{ path('management_product_edit', {'product': product.id}) }}">
-                                            <i class="edit icon white"></i>
+            <span class="ui horizontal section divider">{{ category.name }}</span>
+            {% if category.products is not empty %}
+                <div class="ui grid">
+                    {% for product in category.products %}
+                        <div class="four wide column">
+                            <div class="ui cards">
+                                <div class="card">
+                                    <div class="content bold bigtext center aligned">
+                                        <a class="ui button big blue fluid"
+                                           href="{{ path('management_product_edit', {'product': product.id}) }}">
+                                            {{ product.name }}
                                         </a>
-                                        <a class="ui red button massive icon" href="{{ path('management_product_delete', {'product': product.id}) }}">
-                                            <i class="trash icon white"></i>
-                                        </a>
+                                    </div>
+                                    <div class="extra content">
+                                        <div class="ui two buttons">
+                                            <a class="ui red button big icon"
+                                               href="{{ path('management_product_delete', {'product': product.id}) }}">
+                                                <i class="trash icon white"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-            </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                    <span class="ui horizontal section divider">Keine {{ category.name }}-Produkte vorhanden</span>
+            {% endif %}
         {% endfor %}
-        {% else %}
-        <h2>Keine Produkte vorhanden</h2>
+    {% else %}
+        <div class="ui container">
+            <span class="ui horizontal section divider">Keine Kategorien vorhanden</span>
+        </div>
     {% endif %}
-
-    {% include 'includes/print/backButton.html.twig' with {'url': path('home')} %}
 {% endblock %}

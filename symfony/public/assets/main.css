@@ -3,4 +3,9 @@
 }
 .item .ui.button {
     border-radius: 0;
+    margin: 0;
+}
+
+.attached .ui.menu {
+    border: 0;
 }
