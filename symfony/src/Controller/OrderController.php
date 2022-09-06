@@ -3,7 +3,7 @@
 namespace Pos\Controller;
 
 use Pos\Entity\Transaction;
-use Pos\Form\OrderType;
+use Pos\Form\OrderTransactionType;
 use Pos\Repository\TransactionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class OrderController extends AbstractController
     public function new(Request $request): Response
     {
         $order = new Transaction();
-        $form = $this->createForm(OrderType::class, $order);
+        $form = $this->createForm(OrderTransactionType::class, $order);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -60,7 +60,7 @@ class OrderController extends AbstractController
      */
     public function edit(Request $request, Transaction $order): Response
     {
-        $form = $this->createForm(OrderType::class, $order);
+        $form = $this->createForm(OrderTransactionType::class, $order);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -3,7 +3,7 @@
 namespace Pos\Controller;
 
 use Pos\Entity\Transaction;
-use Pos\Form\SaleType;
+use Pos\Form\SaleTransactionType;
 use Pos\Repository\TransactionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +21,7 @@ class SaleController extends AbstractController
     public function new(Request $request): Response
     {
         $sale = new Transaction();
-        $form = $this->createForm(SaleType::class, $sale);
+        $form = $this->createForm(SaleTransactionType::class, $sale);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -40,7 +40,7 @@ class SaleController extends AbstractController
 
     public function edit(Request $request, Transaction $sale): Response
     {
-        $form = $this->createForm(SaleType::class, $sale);
+        $form = $this->createForm(SaleTransactionType::class, $sale);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
