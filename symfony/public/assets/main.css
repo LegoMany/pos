@@ -1,23 +1,6 @@
-h1.header {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-align: center;
+.ui.menu {
+    border-radius: 0;
 }
-
-.ui.table {
-    border-spacing: 2px;
-}
-
-.bold {
-    font-weight: bold !important;
-}
-
-.bigtext {
-    font-size: 4rem;
-}
-
-.ui.button.control {
-    height: 150px;
-    line-height: 100px;
-    font-size: 25px;
+.item .ui.button {
+    border-radius: 0;
 }

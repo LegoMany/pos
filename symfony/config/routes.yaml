@@ -1,6 +1,6 @@
-dashboard:
+home:
   path: /
-  controller: \Pos\Controller\DashboardController::main
+  controller: \Pos\Controller\HomeController::main
 
 transactions_list:
   path: /produse
@@ -41,10 +41,6 @@ sale_delete:
   controller: \Pos\Controller\SaleController::delete
   requirements:
     sale: '\d+'
-
-register:
-  path: /register
-  controller: \Pos\Controller\DashboardController::register
 
 register_debtnote_list:
   path: /register/debtnotes
@@ -109,7 +105,7 @@ register_sale_close:
 
 management:
   path: /management
-  controller: \Pos\Controller\DashboardController::management
+  controller: \Pos\Controller\HomeController::management
 management_product_list:
   path: /management/products
   controller: \Pos\Controller\Management\ProductController::list

@@ -2,14 +2,17 @@
 
 namespace Pos\Controller;
 
+use Pos\Repository\SaleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-class DashboardController extends AbstractController
+class HomeController extends AbstractController
 {
-    public function main(): Response
+    public function main(SaleRepository $saleRepository): Response
     {
-        return $this->render('dashboard.html.twig');
+        return $this->render('home.html.twig', [
+            'notes' => $saleRepository->findDebtNotes(),
+        ]);
     }
 
     public function management(): Response

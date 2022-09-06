@@ -63,7 +63,7 @@ class SaleController extends AbstractController
             $itemRepository->delete($item);
         }
         $saleRepository->delete($sale);
-        return $this->redirectToRoute('register');
+        return $this->redirectToRoute('home');
     }
 
     public function close(Sale $sale, Register $register): Response

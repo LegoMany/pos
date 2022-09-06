@@ -1,21 +1,24 @@
 {% extends 'layout.html.twig' %}
 
-{% block body %}
-    <div class="ui grid">
-        <div class="row">
-            <div class="column">
-                <h2>Verwaltung</h2>
-            </div>
-        </div>
-        <div class="two column row">
-            <div class="column">
-                <a class="ui button fluid massive" href="{{ path('management_product_list') }}">Produkte</a>
-            </div>
-            <div class="column">
-                <a class="ui button fluid massive" href="{{ path('management_client_list') }}">Kunden</a>
-            </div>
-        </div>
-    </div>
+{% block header %}
+    <a href="{{ path('management') }}" class="item active">
+        Verwaltung
+    </a>
+{% endblock %}
 
-    {% include 'includes/print/backButton.html.twig' with {'url': path('dashboard')} %}
+{% block actions %}
+    <div class="ui three item menu">
+        <a href="{{ path('management_product_category_list') }}"
+           class="ui big fluid button blue">
+            Kategorien
+        </a>
+        <a href="{{ path('management_product_list') }}"
+           class="ui big fluid button green">
+            Produkte
+        </a>
+        <a href="{{ path('management_client_list') }}"
+           class="ui big fluid button yellow">
+            Kunden
+        </a>
+    </div>
 {% endblock %}

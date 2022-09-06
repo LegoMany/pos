@@ -1,12 +1,13 @@
 {% extends 'layout.html.twig' %}
 
-{% block body %}
-    <div class="ui container">
-        <div class="column">
-            <h2>Verkauf</h2>
-        </div>
-    </div>
+{% block header %}
+    <a href="{{ path('register_sale_back', {'sale': sale.id}) }}" class="item">
+        POS
+    </a>
+{% endblock %}
 
+
+{% block body %}
     <div class="ui container">
         <div class="ui grid">
             <div class="column ten wide">
@@ -86,6 +87,4 @@
             Abschließen
         </button>
     </div>
-
-    {% include 'includes/print/backButton.html.twig' with {'url': path('register_sale_back', {'sale': sale.id}) } %}
 {% endblock %}
