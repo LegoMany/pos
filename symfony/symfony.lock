@@ -1,4 +1,7 @@
 {
+    "behat/transliterator": {
+        "version": "v1.5.0"
+    },
     "doctrine/annotations": {
         "version": "1.13",
         "recipe": {
@@ -10,6 +13,21 @@
         "files": [
             "config/routes/annotations.yaml"
         ]
+    },
+    "doctrine/cache": {
+        "version": "2.2.0"
+    },
+    "doctrine/collections": {
+        "version": "2.3.0"
+    },
+    "doctrine/common": {
+        "version": "3.5.0"
+    },
+    "doctrine/dbal": {
+        "version": "3.9.4"
+    },
+    "doctrine/deprecations": {
+        "version": "1.1.5"
     },
     "doctrine/doctrine-bundle": {
         "version": "2.7",
@@ -38,6 +56,57 @@
             "migrations/.gitignore"
         ]
     },
+    "doctrine/event-manager": {
+        "version": "1.2.0"
+    },
+    "doctrine/inflector": {
+        "version": "2.0.10"
+    },
+    "doctrine/instantiator": {
+        "version": "2.0.0"
+    },
+    "doctrine/lexer": {
+        "version": "3.0.1"
+    },
+    "doctrine/migrations": {
+        "version": "3.9.0"
+    },
+    "doctrine/orm": {
+        "version": "2.20.3"
+    },
+    "doctrine/persistence": {
+        "version": "3.4.0"
+    },
+    "doctrine/sql-formatter": {
+        "version": "1.5.2"
+    },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.18"
+    },
+    "gedmo/doctrine-extensions": {
+        "version": "v3.20.0"
+    },
+    "laminas/laminas-code": {
+        "version": "4.16.0"
+    },
+    "monolog/monolog": {
+        "version": "3.9.0"
+    },
+    "psr/cache": {
+        "version": "3.0.0"
+    },
+    "psr/clock": {
+        "version": "1.0.0"
+    },
+    "psr/container": {
+        "version": "1.1.2"
+    },
+    "psr/event-dispatcher": {
+        "version": "1.0.0"
+    },
+    "psr/log": {
+        "version": "2.0.0"
+    },
     "sensio/framework-extra-bundle": {
         "version": "6.2",
         "recipe": {
@@ -62,6 +131,18 @@
             "config/packages/stof_doctrine_extensions.yaml"
         ]
     },
+    "symfony/asset": {
+        "version": "v5.4.45"
+    },
+    "symfony/cache": {
+        "version": "v6.4.21"
+    },
+    "symfony/cache-contracts": {
+        "version": "v3.5.1"
+    },
+    "symfony/config": {
+        "version": "v6.4.14"
+    },
     "symfony/console": {
         "version": "5.4",
         "recipe": {
@@ -85,6 +166,33 @@
         "files": [
             "config/packages/debug.yaml"
         ]
+    },
+    "symfony/dependency-injection": {
+        "version": "v5.4.48"
+    },
+    "symfony/deprecation-contracts": {
+        "version": "v3.5.1"
+    },
+    "symfony/doctrine-bridge": {
+        "version": "v5.4.48"
+    },
+    "symfony/dotenv": {
+        "version": "v5.4.48"
+    },
+    "symfony/error-handler": {
+        "version": "v6.3.12"
+    },
+    "symfony/event-dispatcher": {
+        "version": "v6.4.13"
+    },
+    "symfony/event-dispatcher-contracts": {
+        "version": "v3.5.1"
+    },
+    "symfony/filesystem": {
+        "version": "v6.4.13"
+    },
+    "symfony/finder": {
+        "version": "v6.4.17"
     },
     "symfony/flex": {
         "version": "1.19",
@@ -117,6 +225,15 @@
             "src/Kernel.php"
         ]
     },
+    "symfony/http-foundation": {
+        "version": "v6.4.21"
+    },
+    "symfony/http-kernel": {
+        "version": "v6.0.20"
+    },
+    "symfony/monolog-bridge": {
+        "version": "v6.4.13"
+    },
     "symfony/monolog-bundle": {
         "version": "3.8",
         "recipe": {
@@ -128,6 +245,54 @@
         "files": [
             "config/packages/monolog.yaml"
         ]
+    },
+    "symfony/options-resolver": {
+        "version": "v6.4.16"
+    },
+    "symfony/password-hasher": {
+        "version": "v6.4.13"
+    },
+    "symfony/polyfill-ctype": {
+        "version": "v1.32.0"
+    },
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.32.0"
+    },
+    "symfony/polyfill-intl-icu": {
+        "version": "v1.32.0"
+    },
+    "symfony/polyfill-intl-normalizer": {
+        "version": "v1.32.0"
+    },
+    "symfony/polyfill-mbstring": {
+        "version": "v1.32.0"
+    },
+    "symfony/polyfill-php72": {
+        "version": "v1.31.0"
+    },
+    "symfony/polyfill-php73": {
+        "version": "v1.32.0"
+    },
+    "symfony/polyfill-php80": {
+        "version": "v1.32.0"
+    },
+    "symfony/polyfill-php81": {
+        "version": "v1.32.0"
+    },
+    "symfony/polyfill-php83": {
+        "version": "v1.32.0"
+    },
+    "symfony/polyfill-php84": {
+        "version": "v1.32.0"
+    },
+    "symfony/property-access": {
+        "version": "v6.4.18"
+    },
+    "symfony/property-info": {
+        "version": "v6.4.18"
+    },
+    "symfony/proxy-manager-bridge": {
+        "version": "v5.4.45"
     },
     "symfony/routing": {
         "version": "5.4",
@@ -154,6 +319,33 @@
             "config/packages/security.yaml"
         ]
     },
+    "symfony/security-core": {
+        "version": "v5.4.48"
+    },
+    "symfony/security-csrf": {
+        "version": "v6.4.13"
+    },
+    "symfony/security-guard": {
+        "version": "v5.4.45"
+    },
+    "symfony/security-http": {
+        "version": "v5.4.47"
+    },
+    "symfony/service-contracts": {
+        "version": "v2.5.4"
+    },
+    "symfony/stopwatch": {
+        "version": "v7.2.4"
+    },
+    "symfony/string": {
+        "version": "v6.4.21"
+    },
+    "symfony/translation-contracts": {
+        "version": "v3.5.1"
+    },
+    "symfony/twig-bridge": {
+        "version": "v5.4.48"
+    },
     "symfony/twig-bundle": {
         "version": "5.4",
         "recipe": {
@@ -179,6 +371,12 @@
             "config/packages/validator.yaml"
         ]
     },
+    "symfony/var-dumper": {
+        "version": "v6.4.21"
+    },
+    "symfony/var-exporter": {
+        "version": "v7.2.6"
+    },
     "symfony/web-profiler-bundle": {
         "version": "5.4",
         "recipe": {
@@ -192,7 +390,13 @@
             "config/routes/web_profiler.yaml"
         ]
     },
+    "symfony/yaml": {
+        "version": "v5.4.45"
+    },
     "twig/extra-bundle": {
         "version": "v3.4.0"
+    },
+    "twig/twig": {
+        "version": "v3.21.1"
     }
 }
