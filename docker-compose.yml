@@ -4,11 +4,11 @@ services:
   httpd:
     image: in2code/httpd:2.4-alpine
     environment:
-      WEB_DOCUMENT_ROOT: /app/symfony/${WEBROOT}/
+      WEB_DOCUMENT_ROOT: /app/app/${WEBROOT}/
       VIRTUAL_HOST: ${HOST}
       VIRTUAL_PORT: 443
       VIRTUAL_PROTO: https
-    working_dir: /app/symfony
+    working_dir: /app/app
     volumes:
       - ./:/app/:cached
     networks:
@@ -17,12 +17,16 @@ services:
           - ${HOST}
 
   php:
-    image: in2code/php-dev:8.4-fpm
+    build:
+      context: .project/docker/php/
+      dockerfile: Dockerfile
     volumes:
       - ./:/app/:cached
       - $HOME/.composer/auth.json:/tmp/composer/auth.json
       - $HOME/.composer/cache/:/tmp/composer/cache/
-    working_dir: /app/symfony
+      - $HOME/.gitconfig:/home/app/.gitconfig
+      - $HOME/.ssh/:/home/app/.ssh/
+    working_dir: /app/app
     env_file:
       - .env
 
