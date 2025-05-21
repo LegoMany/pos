@@ -1,10 +1,9 @@
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.prod
-/symfony_bkp/config/secrets/prod/prod.decrypt.private.php
-/symfony_bkp/public/bundles/
-/symfony_bkp/var/
-/symfony_bkp/vendor/
+/app/public/bundles/
+/app/var
+/app/vendor/
 ###< symfony/framework-bundle ###
 
 /.idea/
